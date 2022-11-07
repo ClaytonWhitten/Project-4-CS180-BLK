@@ -5,6 +5,14 @@ public class User {
     private String username;
     private String password;
 
+    private String type;
+
+    public User(String username, String password, String type) {
+        this.username = username;
+        this.password = password;
+        this.type = type;
+    }
+
     public User(String username, String password) {
         this.username = username;
         this.password = password;
@@ -24,7 +32,7 @@ public class User {
         try {
 
             BufferedWriter bw = new BufferedWriter(new FileWriter(file));
-            bw.write(password);
+            bw.write(password + ";" + type);
             bw.close();
             return true;
 
@@ -37,19 +45,45 @@ public class User {
     public boolean login() {
         File file = new File(username + ".txt");
         BufferedReader br = null;
+        String firstLine = null;
         try {
             br = new BufferedReader(new FileReader(file));
-            return password.equals(br.readLine());
+            firstLine = br.readLine();
+            return password.equals(firstLine.substring(0, firstLine.indexOf(";")));
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             try {
+                type = firstLine.substring(firstLine.indexOf(";") + 1);
                 br.close();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         return false;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }
