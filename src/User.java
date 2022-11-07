@@ -20,6 +20,7 @@ public class User {
 
     public boolean signUp() {
         File file = new File(username + ".txt");
+        File sellersFile = new File("sellers.txt");
 
         try {
             if (!(file.createNewFile())) {
@@ -34,6 +35,15 @@ public class User {
             BufferedWriter bw = new BufferedWriter(new FileWriter(file));
             bw.write(password + ";" + type);
             bw.close();
+            if (type.equalsIgnoreCase("seller")) {
+                try {
+                    BufferedWriter bw2 = new BufferedWriter(new FileWriter(sellersFile));
+                    bw2.write(username + "\n");
+                    bw2.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
             return true;
 
         } catch (IOException e) {

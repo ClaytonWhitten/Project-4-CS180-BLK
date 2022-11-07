@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 public class Seller extends User {
@@ -69,6 +66,31 @@ public class Seller extends User {
                         i = j;
                         break;
                     }
+                }
+            }
+        }
+    }
+
+    public void logOut() {
+        PrintWriter pw = null;;
+        try {
+            File f = new File(super.getUsername() + ".txt");
+            FileOutputStream fos = new FileOutputStream(f, false);
+            pw = new PrintWriter(fos);
+            pw.println(super.getPassword() + ";" + "buyer");
+            for (int i = 0; i < storeFronts.size(); i++) {
+                pw.println("*****");
+                pw.println(storeFronts.get(i));
+                pw.println("*****");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (pw != null) {
+                try {
+                    pw.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         }
