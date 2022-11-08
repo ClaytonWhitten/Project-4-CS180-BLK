@@ -126,4 +126,18 @@ public class StoreFront {
         }
         return list;
     }
+
+    @Override
+    public String toString() {
+        String storefront = "";
+        storefront += storeFrontName + "\n";
+        for (int i = 0; i < products.size(); i++) {
+            storefront += "-" + products.get(i) + "\n";
+        }
+        storefront += ">" + sales.get(0);
+        for (int i = 1; i < sales.size(); i++) {
+            storefront += ";" + sales.get(i);
+        }
+        return storefront;
+    }
 }
