@@ -54,7 +54,7 @@ public class Buyer extends User {
         for (int i = 0; i < lines.size(); i++) {
             if (lines.get(i).charAt(0) == '-') {
                 tempProductFields = lines.get(i).split("::");
-                shoppingCart.add(new Product(tempProductFields[0], tempProductFields[1], tempProductFields[2], Integer.parseInt(tempProductFields[3]), Double.parseDouble(tempProductFields[4])));
+                shoppingCart.add(new Product(tempProductFields[0], tempProductFields[1], tempProductFields[2], Integer.parseInt(tempProductFields[3]), Double.parseDouble(tempProductFields[4]), Integer.parseInt(tempProductFields[5])));
             }
             if (lines.get(i).charAt(0) == '=') {
                 cartQuanitities.add(Integer.parseInt(lines.get(i).substring(1)));
@@ -87,9 +87,9 @@ public class Buyer extends User {
             }
             pw.println("*****");
             pw.print(">");
-            pw.print(purchases.get(0));
+            pw.print(purchases.get(0).getCustomerInfo() + "," + purchases.get(0).getProductName() + "," + purchases.get(0).getQuantity() + "," + purchases.get(0).getRevenue());
             for (int i = 1; i < purchases.size(); i++) {
-                pw.println(";" + purchases.get(i));
+                pw.println(";" + purchases.get(i).getCustomerInfo() + "," + purchases.get(i).getProductName() + "," + purchases.get(i).getQuantity() + "," + purchases.get(i).getRevenue());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -102,5 +102,10 @@ public class Buyer extends User {
                 }
             }
         }
+    }
+
+    public void addToCart(Product product, int quantity) {
+        shoppingCart.add(product);
+        cartQuanitities.add(quantity);
     }
 }

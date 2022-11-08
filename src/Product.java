@@ -6,12 +6,24 @@ public class Product {
     private int availableQuantity;
     private double price;
 
+    private int numAddedToCarts;
+
     public Product(String name, String storeFrontName, String description, int availableQuantity, double price) {
         this.name = name;
         this.storeFrontName = storeFrontName;
         this.description = description;
         this.availableQuantity = availableQuantity;
         this.price = price;
+        this.numAddedToCarts = 0;
+    }
+
+    public Product(String name, String storeFrontName, String description, int availableQuantity, double price, int numAddedToCarts) {
+        this.name = name;
+        this.storeFrontName = storeFrontName;
+        this.description = description;
+        this.availableQuantity = availableQuantity;
+        this.price = price;
+        this.numAddedToCarts = numAddedToCarts;
     }
 
     public String getName() {
@@ -52,5 +64,22 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getNumAddedToCarts() {
+        return numAddedToCarts;
+    }
+
+    public void setNumAddedToCarts(int numAddedToCarts) {
+        this.numAddedToCarts = numAddedToCarts;
+    }
+
+    public boolean addedToCart(int quantity) {
+        if (quantity > availableQuantity) {
+            return false;
+        } else {
+            numAddedToCarts += quantity;
+            return true;
+        }
     }
 }

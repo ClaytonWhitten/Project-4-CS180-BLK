@@ -68,12 +68,32 @@ public class Marketplace {
         Sale sale = null;
         for (int i = 0; i < allSellers.size(); i++) {
             for (int j = 0; j < allSellers.get(i).getStoreFronts().size(); j++) {
-                if (allSellers.get(i).getStoreFronts().get(i).getStoreFrontName().equalsIgnoreCase(storeFrontName)) {
-                    sale = allSellers.get(i).getStoreFronts().get(i).buyItem(buyer, productName, quantity);
+                if (allSellers.get(i).getStoreFronts().get(j).getStoreFrontName().equalsIgnoreCase(storeFrontName)) {
+                    sale = allSellers.get(i).getStoreFronts().get(j).buyItem(buyer, productName, quantity);
                 }
             }
         }
         return sale;
+    }
+
+    public boolean addToCart(Buyer buyer, Product product, int quantity) {
+        for (int i = 0; i < allSellers.size(); i++) {
+            for (int j = 0; j < allSellers.get(i).getStoreFronts().size(); j++) {
+                if (allSellers.get(i).getStoreFronts().get(j).getStoreFrontName().equalsIgnoreCase(product.getStoreFrontName())) {
+                    for (int k = 0; k < allSellers.get(i).getStoreFronts().get(j).getProducts().size(); k++) {
+                        if (allSellers.get(i).getStoreFronts().get(j).getProducts().get(k).getName().equalsIgnoreCase(product.getName())) {
+                            if (allSellers.get(i).getStoreFronts().get(j).getProducts().get(k).addedToCart(quantity)) {
+                                buyer.addToCart(product, quantity);
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     /*

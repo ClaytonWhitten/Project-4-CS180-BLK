@@ -65,7 +65,7 @@ public class Seller extends User {
                     }
                     if (lines.get(j).charAt(0) == '-') {
                         tempProductFields = lines.get(j).split("::");
-                        tempProductsList.add(new Product(tempProductFields[0], tempProductFields[1], tempProductFields[2], Integer.parseInt(tempProductFields[3]), Double.parseDouble(tempProductFields[4])));
+                        tempProductsList.add(new Product(tempProductFields[0], tempProductFields[1], tempProductFields[2], Integer.parseInt(tempProductFields[3]), Double.parseDouble(tempProductFields[4]), Integer.parseInt(tempProductFields[5])));
                     }
                     if (lines.get(j).charAt(0) == '>') {
                         tempSalesArray = lines.get(j).substring(1).split(";");
