@@ -65,7 +65,7 @@ public class Seller extends User {
                         tempSalesArray = lines.get(j).substring(1).split(";");
                         for (int k = 0; k < tempSalesArray.length; k++) {
                             tempSalesFields = tempSalesArray[k].split(",");
-                            tempSalesList.add(new Sale(tempSalesFields[0], tempSalesFields[1], Double.parseDouble(tempSalesFields[2])));
+                            tempSalesList.add(new Sale(tempSalesFields[0], tempSalesFields[1], Integer.parseInt(tempSalesFields[2]), Double.parseDouble(tempSalesFields[3])));
                         }
                     }
                     if (lines.get(j).equalsIgnoreCase("*****")) {

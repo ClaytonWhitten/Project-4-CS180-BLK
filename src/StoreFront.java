@@ -45,4 +45,20 @@ public class StoreFront {
     public void setSales(ArrayList<Sale> sales) {
         this.sales = sales;
     }
+
+    public Sale buyItem(Buyer buyer, String productName, int quantity) {
+        Sale sale = null;
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).getName().equalsIgnoreCase(productName)) {
+                if (products.get(i).getAvailableQuantity() - quantity <= 0) {
+                    return null;
+                } else {
+                    products.get(i).setAvailableQuantity(products.get(i).getAvailableQuantity() - quantity);
+                    sale = new Sale(buyer.getUsername(), productName, quantity, products.get(i).getPrice()*quantity);
+                }
+
+            }
+        }
+        return sale;
+    }
 }
