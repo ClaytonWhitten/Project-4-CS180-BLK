@@ -45,4 +45,16 @@ public class Marketplace {
             }
         }
     }
+
+    public Sale buyItem(Buyer buyer, String storeFrontName, String productName, int quantity) {
+        Sale sale;
+        for (int i = 0; i < allSellers.size(); i++) {
+            for (int j = 0; j < allSellers.get(i).getStoreFronts().size(); j++) {
+                if (allSellers.get(i).getStoreFronts().get(i).getStoreFrontName().equalsIgnoreCase(storeFrontName)) {
+                    sale = allSellers.get(i).getStoreFronts().get(i).buyItem(buyer, productName, quantity);
+                }
+            }
+        }
+        return sale;
+    }
 }
