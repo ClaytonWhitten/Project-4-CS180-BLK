@@ -104,4 +104,8 @@ public class Seller extends User {
             }
         }
     }
+
+    public ArrayList<StoreFront> getStoreFronts() {
+        return storeFronts;
+    }
 }

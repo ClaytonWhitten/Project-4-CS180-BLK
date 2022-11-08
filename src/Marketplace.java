@@ -6,7 +6,9 @@ import java.util.ArrayList;
 
 public class Marketplace {
     private ArrayList<Seller> allSellers;
-    
+    private ArrayList<StoreFront> allStores;
+    private ArrayList<Product> allProducts;
+
     public Marketplace() {
         allSellers = new ArrayList<>();
         BufferedReader bfr = null;
@@ -33,6 +35,14 @@ public class Marketplace {
         }
         for (int i = 0; i < lines.size(); i++) {
             allSellers.add(new Seller(lines.get(i), "seller"));
+        }
+        for (int i = 0; i < allSellers.size(); i++) {
+            for (int j = 0; j < allSellers.get(i).getStoreFronts().size(); j++) {
+                allStores.add(allSellers.get(i).getStoreFronts().get(j));
+                for (int k = 0; k < allSellers.get(i).getStoreFronts().get(j).getProducts().size(); k++) {
+                    allProducts.add(allSellers.get(i).getStoreFronts().get(j).getProducts().get(k));
+                }
+            }
         }
     }
 }

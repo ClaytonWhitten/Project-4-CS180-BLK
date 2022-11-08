@@ -13,4 +13,36 @@ public class StoreFront {
         this.products = products;
         this.sales = sales;
     }
+
+    public String getStoreFrontName() {
+        return storeFrontName;
+    }
+
+    public void setStoreFrontName(String storeFrontName) {
+        this.storeFrontName = storeFrontName;
+    }
+
+    public String getSellerUsername() {
+        return sellerUsername;
+    }
+
+    public void setSellerUsername(String sellerUsername) {
+        this.sellerUsername = sellerUsername;
+    }
+
+    public ArrayList<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(ArrayList<Product> products) {
+        this.products = products;
+    }
+
+    public ArrayList<Sale> getSales() {
+        return sales;
+    }
+
+    public void setSales(ArrayList<Sale> sales) {
+        this.sales = sales;
+    }
 }
