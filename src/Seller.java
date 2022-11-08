@@ -11,6 +11,12 @@ public class Seller extends User {
         readSellerFile(user.getUsername() + ".txt");
     }
 
+    public Seller(String username, String type) {
+        super(username, null, type);
+        storeFronts = new ArrayList<>();
+        readSellerFile(username + ".txt");
+    }
+
     private void readSellerFile(String fileName) {
         BufferedReader bfr = null;
         ArrayList<String> lines = new ArrayList<>();
@@ -41,6 +47,9 @@ public class Seller extends User {
         String[] tempSalesFields;
         ArrayList<Sale> tempSalesList;
         for (int i = 0; i < lines.size(); i++) {
+            if (i == 0 && super.getPassword() == null) {
+                super.setPassword(lines.get(i).substring(0, lines.get(i).indexOf(";")));
+            }
             if (lines.get(i).equalsIgnoreCase("*****")) {
                 tempProductsList = new ArrayList<>();
                 tempSalesList = new ArrayList<>();
