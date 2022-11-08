@@ -99,12 +99,36 @@ public class Marketplace {
     /*
     Close Marketplace:
     Since throughout the process of a buyer interacting with the marketplace, one or more sellers' data has been changed:
-    - This method iterates through every seller in the maerketplace and calls "logOut"
+    - This method iterates through every seller in the marketplace and calls "logOut"
     - Logging the sellers out essentially re-write's their data files to hold the updated information
      */
     public void closeMarketplace() {
         for (int i = 0; i < allSellers.size(); i++) {
             allSellers.get(i).logOut();
         }
+    }
+
+    public ArrayList<Seller> getAllSellers() {
+        return allSellers;
+    }
+
+    public void setAllSellers(ArrayList<Seller> allSellers) {
+        this.allSellers = allSellers;
+    }
+
+    public ArrayList<StoreFront> getAllStores() {
+        return allStores;
+    }
+
+    public void setAllStores(ArrayList<StoreFront> allStores) {
+        this.allStores = allStores;
+    }
+
+    public ArrayList<Product> getAllProducts() {
+        return allProducts;
+    }
+
+    public void setAllProducts(ArrayList<Product> allProducts) {
+        this.allProducts = allProducts;
     }
 }
