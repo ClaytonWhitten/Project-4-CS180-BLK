@@ -47,7 +47,7 @@ public class Marketplace {
     }
 
     public Sale buyItem(Buyer buyer, String storeFrontName, String productName, int quantity) {
-        Sale sale;
+        Sale sale = null;
         for (int i = 0; i < allSellers.size(); i++) {
             for (int j = 0; j < allSellers.get(i).getStoreFronts().size(); j++) {
                 if (allSellers.get(i).getStoreFronts().get(i).getStoreFrontName().equalsIgnoreCase(storeFrontName)) {
