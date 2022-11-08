@@ -17,6 +17,12 @@ public class Seller extends User {
         readSellerFile(username + ".txt");
     }
 
+    /*
+    Read Seller File:
+    This function just sets up the seller object by updating its arraylist of store (StoreFront)
+    - The function reads through the seller's file and in accordance to the format I determined, sorts the data and adds
+    it to the arraylists.
+     */
     private void readSellerFile(String fileName) {
         BufferedReader bfr = null;
         ArrayList<String> lines = new ArrayList<>();
@@ -80,13 +86,17 @@ public class Seller extends User {
         }
     }
 
+    /*
+    Log Out:
+    This function is called at the end of a user's session and re-writes any updated data back into their data file
+     */
     public void logOut() {
         PrintWriter pw = null;;
         try {
             File f = new File(super.getUsername() + ".txt");
             FileOutputStream fos = new FileOutputStream(f, false);
             pw = new PrintWriter(fos);
-            pw.println(super.getPassword() + ";" + "buyer");
+            pw.println(super.getPassword() + ";" + "seller");
             for (int i = 0; i < storeFronts.size(); i++) {
                 pw.println("*****");
                 pw.println(storeFronts.get(i));

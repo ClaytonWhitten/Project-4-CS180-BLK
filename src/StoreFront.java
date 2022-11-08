@@ -46,6 +46,14 @@ public class StoreFront {
         this.sales = sales;
     }
 
+    /*
+    Buy Item:
+    Takes a buyer's info, the name of a product their buying, and the quantity being bought and does the following:
+    - returns null if there is more being bought than available
+    - if not, then the available amount is decremented by the quantity bought
+    - a new sale object is created and added to the storefront's sales array
+    - the sale item is also returned to be added to the Buyer's array
+     */
     public Sale buyItem(Buyer buyer, String productName, int quantity) {
         Sale sale = null;
         for (int i = 0; i < products.size(); i++) {

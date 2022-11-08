@@ -46,6 +46,13 @@ public class Marketplace {
         }
     }
 
+    /*
+    Buy Item:
+    This version of buy item takes an additional parameter, the storefront name under which the item is being purchased.
+    - First it uses the storefront name to locate which seller's storefront is being used
+    - It then calls that storefront's buy item method
+    - it also returns the sale object that is produced from the storefront method
+     */
     public Sale buyItem(Buyer buyer, String storeFrontName, String productName, int quantity) {
         Sale sale = null;
         for (int i = 0; i < allSellers.size(); i++) {
@@ -58,6 +65,12 @@ public class Marketplace {
         return sale;
     }
 
+    /*
+    Close Marketplace:
+    Since throughout the process of a buyer interacting with the marketplace, one or more sellers' data has been changed:
+    - This method iterates through every seller in the maerketplace and calls "logOut"
+    - Logging the sellers out essentially re-write's their data files to hold the updated information
+     */
     public void closeMarketplace() {
         for (int i = 0; i < allSellers.size(); i++) {
             allSellers.get(i).logOut();

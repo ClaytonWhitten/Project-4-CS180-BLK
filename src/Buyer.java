@@ -16,6 +16,12 @@ public class Buyer extends User {
         readBuyerFile(user.getUsername() + ".txt");
     }
 
+    /*
+    Read Buyer File:
+    This function just sets up the buyer object by updating its arraylist of purchases (Sale) and shopping cart (Product)
+    - The function reads through the buyer's file and in accordance to the format I determined, sorts the data and adds
+    it to the arraylists.
+     */
     private void readBuyerFile(String fileName) {
         BufferedReader bfr = null;
         ArrayList<String> lines = new ArrayList<>();
@@ -59,6 +65,10 @@ public class Buyer extends User {
         }
     }
 
+    /*
+    Log Out:
+    This function is called at the end of a user's session and re-writes any updated data back into their data file
+     */
     public void logOut() {
         PrintWriter pw = null;;
         try {
