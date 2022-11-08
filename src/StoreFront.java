@@ -59,6 +59,7 @@ public class StoreFront {
 
             }
         }
+        sales.add(sale);
         return sale;
     }
 }

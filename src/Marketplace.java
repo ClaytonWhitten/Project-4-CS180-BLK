@@ -57,4 +57,10 @@ public class Marketplace {
         }
         return sale;
     }
+
+    public void closeMarketplace() {
+        for (int i = 0; i < allSellers.size(); i++) {
+            allSellers.get(i).logOut();
+        }
+    }
 }
