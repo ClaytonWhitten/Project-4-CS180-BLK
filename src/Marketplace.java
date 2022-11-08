@@ -9,6 +9,17 @@ public class Marketplace {
     private ArrayList<StoreFront> allStores;
     private ArrayList<Product> allProducts;
 
+    /*
+    Initialize Marketplace:
+    This function sets up the marketplace for a buyer to interact with doing the following steps:
+    - First it reads through the global sellers file sellers.txt to get a list of the usernames for all the sellers
+    - with these usernames the marketplace creates an arraylist of seller objects
+    - by initializing each seller, the marketplace automatically reads all of their files through the constructor for Seller
+    - By reading each seller's files, in the arraylist of seller objects each seller already has all their storefronts loaded
+    - With all these storefronts loaded, the Marketplace iterates through each storefront and each product
+    - through this process two arraylists, one of every storefront and one of every product, are created
+    - these arraylists are what will be used to create the menu for the user to interact with
+     */
     public Marketplace() {
         allSellers = new ArrayList<>();
         BufferedReader bfr = null;
