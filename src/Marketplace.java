@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Marketplace {
     private ArrayList<Seller> allSellers;
@@ -130,5 +131,25 @@ public class Marketplace {
 
     public void setAllProducts(ArrayList<Product> allProducts) {
         this.allProducts = allProducts;
+    }
+
+//    public ArrayList<Product> sort(String sortValue) {
+//        ArrayList<Product> sortedList = new ArrayList<>();
+//
+//        if (sortValue.equalsIgnoreCase("price")) {
+//            sortedList =
+//        }
+//    }
+
+    public ArrayList<Product> search(String search) {
+        ArrayList<Product> searchResults = new ArrayList<>();
+        for (int i = 0; i < allProducts.size(); i++) {
+            if (allProducts.get(i).getName().contains(search) ||
+                    allProducts.get(i).getStoreFrontName().contains(search) ||
+                    allProducts.get(i).getDescription().contains(search)) {
+                searchResults.add(allProducts.get(i));
+            }
+        }
+        return searchResults;
     }
 }
