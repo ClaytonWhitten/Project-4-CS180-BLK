@@ -5,6 +5,7 @@ public class Buyer extends User {
 
     private String name;
     private ArrayList<Product> shoppingCart;
+    private ArrayList<Integer> cartQuanitities;
 
     private ArrayList<Sale> purchases;
 
@@ -55,6 +56,9 @@ public class Buyer extends User {
                 tempProductFields = lines.get(i).split("::");
                 shoppingCart.add(new Product(tempProductFields[0], tempProductFields[1], tempProductFields[2], Integer.parseInt(tempProductFields[3]), Double.parseDouble(tempProductFields[4])));
             }
+            if (lines.get(i).charAt(0) == '=') {
+                cartQuanitities.add(Integer.parseInt(lines.get(i).substring(1)));
+            }
             if (lines.get(i).charAt(0) == '>') {
                 tempSalesArray = lines.get(i).substring(1).split(";");
                 for (int k = 0; k < tempSalesArray.length; k++) {
@@ -79,6 +83,7 @@ public class Buyer extends User {
             pw.println("*****");
             for (int i = 0; i < shoppingCart.size(); i++) {
                 pw.println("-" + shoppingCart.get(i));
+                pw.println("=" + cartQuanitities.get(i));
             }
             pw.println("*****");
             pw.print(">");
