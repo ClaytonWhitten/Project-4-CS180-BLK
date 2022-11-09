@@ -93,11 +93,7 @@ public class Product {
             double price1 = p1.getPrice();
             double price2 = p2.getPrice();
 
-            // For ascending order
-            return Double.compare(price1, price2);
-
-            // For descending order
-            // rollno2-rollno1;
+            return Double.compare(price1, price2); //I found this workaround at https://stackoverflow.com/questions/4242023/comparator-with-double-type
         }
     };
 
@@ -108,11 +104,7 @@ public class Product {
             int num1 = p1.getAvailableQuantity();
             int num2 = p2.getAvailableQuantity();
 
-            // For ascending order
             return num1 - num2;
-
-            // For descending order
-            // rollno2-rollno1;
         }
     };
 
