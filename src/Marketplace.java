@@ -158,4 +158,10 @@ public class Marketplace {
         }
         return searchResults;
     }
+
+    public void printProductList(ArrayList<Product> list) {
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println((i + 1) + ". Store: " + list.get(i).getStoreFrontName() + ", Name: " + list.get(i).getName() + ", Price: " + String.format("%.2f", list.get(i).getPrice()));
+        }
+    }
 }
