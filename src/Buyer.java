@@ -104,6 +104,28 @@ public class Buyer extends User {
         }
     }
 
+    public void exportPurchaseList(String fileName) {
+        PrintWriter pw = null;;
+        try {
+            File f = new File(fileName);
+            FileOutputStream fos = new FileOutputStream(f, false);
+            pw = new PrintWriter(fos);
+            for (int i = 0; i < purchases.size(); i++) {
+                pw.println(purchases.get(i));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (pw != null) {
+                try {
+                    pw.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
     public void addToCart(Product product, int quantity) {
         shoppingCart.add(product);
         cartQuantities.add(quantity);
