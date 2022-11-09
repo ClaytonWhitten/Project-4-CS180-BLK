@@ -5,7 +5,7 @@ public class Buyer extends User {
 
     private String name;
     private ArrayList<Product> shoppingCart;
-    private ArrayList<Integer> cartQuanitities;
+    private ArrayList<Integer> cartQuantities;
 
     private ArrayList<Sale> purchases;
 
@@ -57,7 +57,7 @@ public class Buyer extends User {
                 shoppingCart.add(new Product(tempProductFields[0], tempProductFields[1], tempProductFields[2], Integer.parseInt(tempProductFields[3]), Double.parseDouble(tempProductFields[4]), Integer.parseInt(tempProductFields[5])));
             }
             if (lines.get(i).charAt(0) == '=') {
-                cartQuanitities.add(Integer.parseInt(lines.get(i).substring(1)));
+                cartQuantities.add(Integer.parseInt(lines.get(i).substring(1)));
             }
             if (lines.get(i).charAt(0) == '>') {
                 tempSalesArray = lines.get(i).substring(1).split(";");
@@ -83,7 +83,7 @@ public class Buyer extends User {
             pw.println("*****");
             for (int i = 0; i < shoppingCart.size(); i++) {
                 pw.println("-" + shoppingCart.get(i));
-                pw.println("=" + cartQuanitities.get(i));
+                pw.println("=" + cartQuantities.get(i));
             }
             pw.println("*****");
             pw.print(">");
@@ -106,7 +106,7 @@ public class Buyer extends User {
 
     public void addToCart(Product product, int quantity) {
         shoppingCart.add(product);
-        cartQuanitities.add(quantity);
+        cartQuantities.add(quantity);
     }
 
     public String getName() {
@@ -125,12 +125,12 @@ public class Buyer extends User {
         this.shoppingCart = shoppingCart;
     }
 
-    public ArrayList<Integer> getCartQuanitities() {
-        return cartQuanitities;
+    public ArrayList<Integer> getCartQuantities() {
+        return cartQuantities;
     }
 
-    public void setCartQuanitities(ArrayList<Integer> cartQuanitities) {
-        this.cartQuanitities = cartQuanitities;
+    public void setCartQuantities(ArrayList<Integer> cartQuantities) {
+        this.cartQuantities = cartQuantities;
     }
 
     public ArrayList<Sale> getPurchases() {
