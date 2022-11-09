@@ -108,4 +108,36 @@ public class Buyer extends User {
         shoppingCart.add(product);
         cartQuanitities.add(quantity);
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ArrayList<Product> getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(ArrayList<Product> shoppingCart) {
+        this.shoppingCart = shoppingCart;
+    }
+
+    public ArrayList<Integer> getCartQuanitities() {
+        return cartQuanitities;
+    }
+
+    public void setCartQuanitities(ArrayList<Integer> cartQuanitities) {
+        this.cartQuanitities = cartQuanitities;
+    }
+
+    public ArrayList<Sale> getPurchases() {
+        return purchases;
+    }
+
+    public void setPurchases(ArrayList<Sale> purchases) {
+        this.purchases = purchases;
+    }
 }
