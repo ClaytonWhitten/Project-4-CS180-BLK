@@ -1,3 +1,5 @@
+import java.util.Comparator;
+
 public class Product {
 
     private String name;
@@ -82,6 +84,37 @@ public class Product {
             return true;
         }
     }
+
+    //Found this method usage at https://www.geeksforgeeks.org/how-to-sort-an-arraylist-of-objects-by-property-in-java/
+    public static Comparator<Product> priceCompare = new Comparator<Product>() {
+
+        public int compare(Product p1, Product p2) {
+
+            double price1 = p1.getPrice();
+            double price2 = p2.getPrice();
+
+            // For ascending order
+            return Double.compare(price1, price2);
+
+            // For descending order
+            // rollno2-rollno1;
+        }
+    };
+
+    public static Comparator<Product> availabilityCompare = new Comparator<Product>() {
+
+        public int compare(Product p1, Product p2) {
+
+            int num1 = p1.getAvailableQuantity();
+            int num2 = p2.getAvailableQuantity();
+
+            // For ascending order
+            return num1 - num2;
+
+            // For descending order
+            // rollno2-rollno1;
+        }
+    };
 
     @Override
     public String toString() {

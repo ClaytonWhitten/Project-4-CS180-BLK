@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 
 public class Marketplace {
@@ -133,13 +134,18 @@ public class Marketplace {
         this.allProducts = allProducts;
     }
 
-//    public ArrayList<Product> sort(String sortValue) {
-//        ArrayList<Product> sortedList = new ArrayList<>();
-//
-//        if (sortValue.equalsIgnoreCase("price")) {
-//            sortedList =
-//        }
-//    }
+    public ArrayList<Product> sort(String sortValue) {
+        ArrayList<Product> sortedList = allProducts;
+
+        if (sortValue.equalsIgnoreCase("price")) {
+            Collections.sort(sortedList, Product.priceCompare);
+        }
+        if (sortValue.equalsIgnoreCase("quantity")) {
+            Collections.sort(sortedList, Product.availabilityCompare);
+        }
+
+        return sortedList;
+    }
 
     public ArrayList<Product> search(String search) {
         ArrayList<Product> searchResults = new ArrayList<>();
