@@ -58,12 +58,13 @@ public class StoreFront {
     public Sale buyItem(Buyer buyer, String productName, int quantity) {
         Sale sale = null;
         for (int i = 0; i < products.size(); i++) {
-            if (products.get(i).getName().equalsIgnoreCase(productName)) {
-                if (products.get(i).getAvailableQuantity() - quantity <= 0) {
+            Product p = products.get(i);
+            if (p.getName().equalsIgnoreCase(productName)) {
+                if (p.getAvailableQuantity() - quantity <= 0) {
                     return null;
                 } else {
-                    products.get(i).setAvailableQuantity(products.get(i).getAvailableQuantity() - quantity);
-                    sale = new Sale(buyer.getUsername(), productName, quantity, products.get(i).getPrice()*quantity);
+                    p.setAvailableQuantity(p.getAvailableQuantity() - quantity);
+                    sale = new Sale(buyer.getUsername(), productName, quantity, p.getPrice()*quantity);
                 }
 
             }
@@ -87,14 +88,16 @@ public class StoreFront {
         ArrayList<Map<String, Integer>> list = new ArrayList<>();
         boolean newCustomer = true;
         for (int i = 0; i < sales.size(); i++) {
+            Sale s = sales.get(i);
             for (int j = 0; j < list.size(); j++) {
-                if (list.get(j).containsKey(sales.get(i).getCustomerInfo())) {
-                    list.get(j).put(sales.get(i).getCustomerInfo(), list.get(j).get(sales.get(i).getCustomerInfo()) + sales.get(i).getQuantity());
+                Map<String, Integer> m = list.get(j);
+                if (m.containsKey(s.getCustomerInfo())) {
+                    m.put(s.getCustomerInfo(), m.get(s.getCustomerInfo()) + s.getQuantity());
                     newCustomer = false;
                 }
             }
             if (newCustomer) {
-                list.add(Map.of(sales.get(i).getCustomerInfo(), sales.get(i).getQuantity()));
+                list.add(Map.of(s.getCustomerInfo(), s.getQuantity()));
             }
         }
         return list;

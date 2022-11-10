@@ -47,14 +47,17 @@ public class Buyer extends User {
             }
         }
 
-        String[] tempProductFields;
+        //tempproductfields
+        String[] tpf;
         String[] tempSalesArray;
-        String[] tempSalesFields;
+        //tempsalesfields
+        String[] tsf;
 
         for (int i = 0; i < lines.size(); i++) {
             if (lines.get(i).charAt(0) == '-') {
-                tempProductFields = lines.get(i).split("::");
-                shoppingCart.add(new Product(tempProductFields[0], tempProductFields[1], tempProductFields[2], Integer.parseInt(tempProductFields[3]), Double.parseDouble(tempProductFields[4]), Integer.parseInt(tempProductFields[5])));
+                tpf = lines.get(i).split("::");
+                shoppingCart.add(new Product(tpf[0], tpf[1], tpf[2], Integer.parseInt(tpf[3]), 
+                    Double.parseDouble(tpf[4]), Integer.parseInt(tpf[5])));
             }
             if (lines.get(i).charAt(0) == '=') {
                 cartQuantities.add(Integer.parseInt(lines.get(i).substring(1)));
@@ -62,8 +65,9 @@ public class Buyer extends User {
             if (lines.get(i).charAt(0) == '>') {
                 tempSalesArray = lines.get(i).substring(1).split(";");
                 for (int k = 0; k < tempSalesArray.length; k++) {
-                    tempSalesFields = tempSalesArray[k].split(",");
-                    purchases.add(new Sale(tempSalesFields[0], tempSalesFields[1], Integer.parseInt(tempSalesFields[2]), Double.parseDouble(tempSalesFields[3])));
+                    tsf = tempSalesArray[k].split(",");
+                    purchases.add(new Sale(tsf[0], tsf[1], Integer.parseInt(tsf[2]), 
+                        Double.parseDouble(tsf[3])));
                 }
             }
         }
@@ -87,9 +91,10 @@ public class Buyer extends User {
             }
             pw.println("*****");
             pw.print(">");
-            pw.print(purchases.get(0).getCustomerInfo() + "," + purchases.get(0).getProductName() + "," + purchases.get(0).getQuantity() + "," + purchases.get(0).getRevenue());
-            for (int i = 1; i < purchases.size(); i++) {
-                pw.println(";" + purchases.get(i).getCustomerInfo() + "," + purchases.get(i).getProductName() + "," + purchases.get(i).getQuantity() + "," + purchases.get(i).getRevenue());
+            for (int i = 0; i < purchases.size(); i++) {
+                Sale s = purchases.get(i);
+                pw.println("".format((i != 0 ? ";" : "") + "%s,%s,%d,%.2f", s.getCustomerInfo(), 
+                    s.getProductName(), s.getQuantity(), s.getRevenue()));
             }
         } catch (Exception e) {
             e.printStackTrace();

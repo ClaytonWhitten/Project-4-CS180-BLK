@@ -46,11 +46,13 @@ public class Seller extends User {
                 }
             }
         }
-        String[] tempProductFields;
+        //tempproductfields
+        String[] tpf;
         ArrayList<Product> tempProductsList;
         String tempStorefrontName = null;
         String[] tempSalesArray;
-        String[] tempSalesFields;
+        //tempsalesfields
+        String[] tsf;
         ArrayList<Sale> tempSalesList;
         for (int i = 0; i < lines.size(); i++) {
             if (i == 0 && super.getPassword() == null) {
@@ -64,14 +66,14 @@ public class Seller extends User {
                         tempStorefrontName = lines.get(j);
                     }
                     if (lines.get(j).charAt(0) == '-') {
-                        tempProductFields = lines.get(j).split("::");
-                        tempProductsList.add(new Product(tempProductFields[0], tempProductFields[1], tempProductFields[2], Integer.parseInt(tempProductFields[3]), Double.parseDouble(tempProductFields[4]), Integer.parseInt(tempProductFields[5])));
+                        tpf = lines.get(j).split("::");
+                        tempProductsList.add(new Product(tpf[0], tpf[1], tpf[2], Integer.parseInt(tpf[3]), Double.parseDouble(tpf[4]), Integer.parseInt(tpf[5])));
                     }
                     if (lines.get(j).charAt(0) == '>') {
                         tempSalesArray = lines.get(j).substring(1).split(";");
                         for (int k = 0; k < tempSalesArray.length; k++) {
-                            tempSalesFields = tempSalesArray[k].split(",");
-                            tempSalesList.add(new Sale(tempSalesFields[0], tempSalesFields[1], Integer.parseInt(tempSalesFields[2]), Double.parseDouble(tempSalesFields[3])));
+                            tsf = tempSalesArray[k].split(",");
+                            tempSalesList.add(new Sale(tsf[0], tsf[1], Integer.parseInt(tsf[2]), Double.parseDouble(tsf[3])));
                         }
                     }
                     if (lines.get(j).equalsIgnoreCase("*****")) {

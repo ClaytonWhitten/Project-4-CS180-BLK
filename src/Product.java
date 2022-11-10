@@ -86,35 +86,21 @@ public class Product {
     }
 
     //Found this method usage at https://www.geeksforgeeks.org/how-to-sort-an-arraylist-of-objects-by-property-in-java/
-    public static Comparator<Product> priceCompare = new Comparator<Product>() {
+    // desc - true for descending order, false for ascending order
+    public static Comparator<Product> priceCompare(boolean desc) {
+        return (Product a, Product b) ->
+            (desc ? -1 : 1) * Double.compare(a.getPrice(), b.getPrice());
+    }
 
-        public int compare(Product p1, Product p2) {
-
-            double price1 = p1.getPrice();
-            double price2 = p2.getPrice();
-
-            return Double.compare(price1, price2); //I found this workaround at https://stackoverflow.com/questions/4242023/comparator-with-double-type
-        }
-    };
-
-    public static Comparator<Product> availabilityCompare = new Comparator<Product>() {
-
-        public int compare(Product p1, Product p2) {
-
-            int num1 = p1.getAvailableQuantity();
-            int num2 = p2.getAvailableQuantity();
-
-            return num1 - num2;
-        }
-    };
+    // desc - true for descending order, false for ascending order
+    public static Comparator<Product> availabilityCompare(boolean desc) {
+        return (Product a, Product b) ->
+            (desc ? -1 : 1) * Integer.compare(a.getAvailableQuantity(), a.getAvailableQuantity());
+    }
 
     @Override
     public String toString() {
-        return name + "::" +
-                storeFrontName + "::" +
-                description + "::" +
-                availableQuantity + "::" +
-                price + "::" +
-                numAddedToCarts;
+        return "".format("%s::%s::%s::%d::%.2f::%d", name, storeFrontName, 
+            description, availableQuantity, price, numAddedToCarts);
     }
 }
