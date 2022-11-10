@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.*;
 
 public class StoreFront {
@@ -57,12 +58,13 @@ public class StoreFront {
     public Sale buyItem(Buyer buyer, String productName, int quantity) {
         Sale sale = null;
         for (int i = 0; i < products.size(); i++) {
-            if (products.get(i).getName().equalsIgnoreCase(productName)) {
-                if (products.get(i).getAvailableQuantity() - quantity <= 0) {
+            Product p = products.get(i);
+            if (p.getName().equalsIgnoreCase(productName)) {
+                if (p.getAvailableQuantity() - quantity <= 0) {
                     return null;
                 } else {
-                    products.get(i).setAvailableQuantity(products.get(i).getAvailableQuantity() - quantity);
-                    sale = new Sale(buyer.getUsername(), productName, quantity, products.get(i).getPrice()*quantity);
+                    p.setAvailableQuantity(p.getAvailableQuantity() - quantity);
+                    sale = new Sale(buyer.getUsername(), productName, quantity, p.getPrice()*quantity);
                 }
 
             }
@@ -86,14 +88,16 @@ public class StoreFront {
         ArrayList<Map<String, Integer>> list = new ArrayList<>();
         boolean newCustomer = true;
         for (int i = 0; i < sales.size(); i++) {
+            Sale s = sales.get(i);
             for (int j = 0; j < list.size(); j++) {
-                if (list.get(j).containsKey(sales.get(i).getCustomerInfo())) {
-                    list.get(j).put(sales.get(i).getCustomerInfo(), list.get(j).get(sales.get(i).getCustomerInfo()) + sales.get(i).getQuantity());
+                Map<String, Integer> m = list.get(j);
+                if (m.containsKey(s.getCustomerInfo())) {
+                    m.put(s.getCustomerInfo(), m.get(s.getCustomerInfo()) + s.getQuantity());
                     newCustomer = false;
                 }
             }
             if (newCustomer) {
-                list.add(Map.of(sales.get(i).getCustomerInfo(), sales.get(i).getQuantity()));
+                list.add(Map.of(s.getCustomerInfo(), s.getQuantity()));
             }
         }
         return list;
@@ -139,6 +143,76 @@ public class StoreFront {
             storefront += ";" + sales.get(i);
         }
         return storefront;
+    }
+
+    public void importProducts(String fileName) {
+        BufferedReader bfr = null;
+        ArrayList<String> lines = new ArrayList<>();
+        try {
+            File f = new File(fileName);
+            FileReader fr = new FileReader(f);
+            bfr = new BufferedReader(fr);
+            String currentLine = bfr.readLine();
+            while (currentLine != null) {
+                lines.add(currentLine);
+                currentLine = bfr.readLine();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (bfr != null) {
+                try {
+                    bfr.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        String[] tempProductFields = null;
+        for (int i = 0; i < lines.size(); i++) {
+            try {
+                tempProductFields = lines.get(i).split("::");
+            } catch (Exception e) {
+                System.out.println("Error Adding Product");
+            }
+            if (tempProductFields[0].equalsIgnoreCase("") ||
+                    tempProductFields[1].equalsIgnoreCase("") ||
+                    !tempProductFields[1].equalsIgnoreCase(storeFrontName) ||
+                    tempProductFields[2].equalsIgnoreCase("")) {
+                System.out.println("Error Adding Product");
+            }
+            try {
+                products.add(new Product(tempProductFields[0],
+                        tempProductFields[1],
+                        tempProductFields[2],
+                        Integer.parseInt(tempProductFields[3]),
+                        Double.parseDouble(tempProductFields[4])));
+            } catch (Exception e) {
+                System.out.println("Error Adding Product");
+            }
+        }
+    }
+
+    public void exportProductsList(String fileName) {
+        PrintWriter pw = null;;
+        try {
+            File f = new File(fileName);
+            FileOutputStream fos = new FileOutputStream(f, false);
+            pw = new PrintWriter(fos);
+            for (int i = 0; i < products.size(); i++) {
+                pw.println(products.get(i));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (pw != null) {
+                try {
+                    pw.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     /*

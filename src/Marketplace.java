@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Marketplace {
     private ArrayList<Seller> allSellers;
@@ -48,10 +49,12 @@ public class Marketplace {
             allSellers.add(new Seller(lines.get(i), "seller"));
         }
         for (int i = 0; i < allSellers.size(); i++) {
-            for (int j = 0; j < allSellers.get(i).getStoreFronts().size(); j++) {
-                allStores.add(allSellers.get(i).getStoreFronts().get(j));
-                for (int k = 0; k < allSellers.get(i).getStoreFronts().get(j).getProducts().size(); k++) {
-                    allProducts.add(allSellers.get(i).getStoreFronts().get(j).getProducts().get(k));
+            Seller s = allSellers.get(i);
+            for (int j = 0; j < s.getStoreFronts().size(); j++) {
+                StoreFront sf = s.getStoreFronts().get(j);
+                allStores.add(sf);
+                for (int k = 0; k < sf.getProducts().size(); k++) {
+                    allProducts.add(sf.getProducts().get(k));
                 }
             }
         }
@@ -67,9 +70,11 @@ public class Marketplace {
     public Sale buyItem(Buyer buyer, String storeFrontName, String productName, int quantity) {
         Sale sale = null;
         for (int i = 0; i < allSellers.size(); i++) {
+            Seller s = allSellers.get(i);
             for (int j = 0; j < allSellers.get(i).getStoreFronts().size(); j++) {
-                if (allSellers.get(i).getStoreFronts().get(j).getStoreFrontName().equalsIgnoreCase(storeFrontName)) {
-                    sale = allSellers.get(i).getStoreFronts().get(j).buyItem(buyer, productName, quantity);
+                StoreFront sf = s.getStoreFronts().get(j);
+                if (sf.getStoreFrontName().equalsIgnoreCase(storeFrontName)) {
+                    sale = sf.buyItem(buyer, productName, quantity);
                 }
             }
         }
@@ -78,11 +83,14 @@ public class Marketplace {
 
     public boolean addToCart(Buyer buyer, Product product, int quantity) {
         for (int i = 0; i < allSellers.size(); i++) {
-            for (int j = 0; j < allSellers.get(i).getStoreFronts().size(); j++) {
-                if (allSellers.get(i).getStoreFronts().get(j).getStoreFrontName().equalsIgnoreCase(product.getStoreFrontName())) {
-                    for (int k = 0; k < allSellers.get(i).getStoreFronts().get(j).getProducts().size(); k++) {
-                        if (allSellers.get(i).getStoreFronts().get(j).getProducts().get(k).getName().equalsIgnoreCase(product.getName())) {
-                            if (allSellers.get(i).getStoreFronts().get(j).getProducts().get(k).addedToCart(quantity)) {
+            Seller s = allSellers.get(i);
+            for (int j = 0; j < s.getStoreFronts().size(); j++) {
+                StoreFront sf = s.getStoreFronts().get(j);
+                if (sf.getStoreFrontName().equalsIgnoreCase(product.getStoreFrontName())) {
+                    for (int k = 0; k < sf.getProducts().size(); k++) {
+                        Product p = sf.getProducts().get(k);
+                        if (p.getName().equalsIgnoreCase(product.getName())) {
+                            if (p.addedToCart(quantity)) {
                                 buyer.addToCart(product, quantity);
                                 return true;
                             } else {
@@ -132,8 +140,43 @@ public class Marketplace {
         this.allProducts = allProducts;
     }
 
+    public ArrayList<Product> sort(String sortValue, boolean desc) {
+        ArrayList<Product> sortedList = (ArrayList<Product>) allProducts.clone();
+
+        if (sortValue.equalsIgnoreCase("price")) {
+            Collections.sort(sortedList, Product.priceCompare(desc));
+        }
+        if (sortValue.equalsIgnoreCase("quantity")) {
+            Collections.sort(sortedList, Product.availabilityCompare(desc));
+        }
+
+        return sortedList;
+    }
+
+    public ArrayList<Product> search(String search) {
+        search = search.toLowerCase();
+        ArrayList<Product> searchResults = new ArrayList<>();
+        for (int i = 0; i < allProducts.size(); i++) {
+            Product p = allProducts.get(i);
+            if (p.getName().toLowerCase().contains(search) ||
+                    p.getStoreFrontName().toLowerCase().contains(search) ||
+                    p.getDescription().toLowerCase().contains(search)) {
+                searchResults.add(p);
+            }
+        }
+        return searchResults;
+    }
+
+    public void printProductList(ArrayList<Product> list) {
+        for (int i = 0; i < list.size(); i++) {
+            Product p = list.get(i);
+            System.out.println("".format("%d. Store: %s, Name: %s, Price: %.2f",
+                i + 1, p.getStoreFrontName(), p.getName(), p.getPrice()));
+        }
+    }
+
     /*
-    Print Store Front:
+    Print Marketplace:
     The handout says the following - "The marketplace listing page will show the store,
     product name, and price of the available goods."
     - This method calls printStoreFront for each storefront in allStores
