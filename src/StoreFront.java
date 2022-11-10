@@ -140,4 +140,27 @@ public class StoreFront {
         }
         return storefront;
     }
+
+    /*
+    Print Store Front:
+    The handout says the following - "The marketplace listing page will show the store,
+    product name, and price of the available goods."
+    - This method will print the name of the storefront, and then a numbered list of the products and their prices
+    - This method is intended to be called for each StoreFront in the MarketPlace class
+     */
+    public void printStoreFront() {
+        System.out.println(storeFrontName);
+        System.out.println("|---------------------|");
+
+        for (int i = 0; i < products.size(); i++) {
+            Product currentProduct = (products.get(i));
+
+            System.out.println((i + 1) + ". " + currentProduct.getName());
+            System.out.println("- Price: " + currentProduct.getPrice());
+            System.out.println("");
+        }
+
+        System.out.print("|---------------------|");
+
+    }
 }

@@ -131,4 +131,23 @@ public class Marketplace {
     public void setAllProducts(ArrayList<Product> allProducts) {
         this.allProducts = allProducts;
     }
+
+    /*
+    Print Store Front:
+    The handout says the following - "The marketplace listing page will show the store,
+    product name, and price of the available goods."
+    - This method calls printStoreFront for each storefront in allStores
+    - !IMPORTANT NOTE ABOUT IMPLEMENTATION!
+        - This method will number each StoreFront and number each product in the StoreFront
+        - This means that the user will have to give 2 input values instead of one to reach the desired product
+     */
+    public void printMarketplace() {
+
+        for (int i = 0; i < allStores.size(); i++) {
+            System.out.print((i + 1) + ". ");
+            allStores.get(i).printStoreFront();
+            if (i < allStores.size() - 1)
+                System.out.println("");
+        }
+    }
 }
