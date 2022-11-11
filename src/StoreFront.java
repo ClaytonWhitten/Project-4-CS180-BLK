@@ -237,4 +237,16 @@ public class StoreFront {
         System.out.print("|---------------------|");
 
     }
+
+    public void updateProduct(Product oldP, Product newP) {
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).getName().equalsIgnoreCase(oldP.getName())) {
+                products.set(i, newP);
+            }
+        }
+    }
+
+    public void addProduct(Product p) {
+        products.add(p);
+    }
 }
