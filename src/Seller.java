@@ -17,6 +17,20 @@ public class Seller extends User {
         readSellerFile(username + ".txt");
     }
 
+
+    /*
+    Add Store:
+    This function allows a seller to create a new storeFront
+     */
+    public void addStore(String storeFrontName, String sellerUserName) {
+        StoreFront storeFront = new StoreFront(storeFrontName, sellerUserName);
+        storeFronts.add(storeFront);
+    }
+
+    public void printStoreFronts() {
+
+    }
+
     /*
     Read Seller File:
     This function just sets up the seller object by updating its arraylist of store (StoreFront)

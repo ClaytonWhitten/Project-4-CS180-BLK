@@ -8,6 +8,13 @@ public class StoreFront {
     private ArrayList<Product> products;
     private ArrayList<Sale> sales;
 
+    public StoreFront(String storeFrontName, String sellerUsername) {
+        this.storeFrontName = storeFrontName;
+        this.sellerUsername = sellerUsername;
+        this.products = new ArrayList<>();
+        this.sales = new ArrayList<>();
+    }
+
     public StoreFront(String storeFrontName, String sellerUsername, ArrayList<Product> products, ArrayList<Sale> sales) {
         this.storeFrontName = storeFrontName;
         this.sellerUsername = sellerUsername;

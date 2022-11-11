@@ -56,7 +56,38 @@ public class Main {
 
                     } else { // user login is successful
 
+                        if (user.getType().equals("seller")) { // marketplace for sellers
+                            Seller seller = new Seller(user);
 
+                            if (seller.getStoreFronts().isEmpty()) { // the seller has no stores
+
+                                int createOrLogout;
+                                System.out.println("You don't have any stores!");
+                                do {
+                                    System.out.printf("1. Create a store\n2. Logout\n");
+                                    createOrLogout = scan.nextInt();
+                                    scan.nextLine();
+                                } while (createOrLogout != 1 && createOrLogout != 2);
+
+                                if (createOrLogout == 1) {
+                                    System.out.println("What is the name of your store?");
+                                    String storeName = scan.nextLine();
+                                    storeName = storeName.substring(0,1).toUpperCase() + storeName.substring(1);
+
+                                    seller.addStore(storeName, username);
+                                    seller.logOut();
+
+                                } else if (createOrLogout == 2) {
+                                    choice = 3;
+                                    continue;
+                                }
+                            }
+
+                            if (!(seller.getStoreFronts().isEmpty())) { // the seller has stores
+                                // TODO
+                            }
+
+                        }
 
                     }
 
