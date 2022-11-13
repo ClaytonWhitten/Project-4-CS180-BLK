@@ -15,6 +15,12 @@ public class StoreFront {
         this.sales = new ArrayList<>();
     }
 
+    public StoreFront(String storeFrontName, String sellerUsername, ArrayList<Product> products) {
+      this.storeFrontName = storeFrontName;
+      this.sellerUsername = sellerUsername;
+      this.products = products;
+    }
+
     public StoreFront(String storeFrontName, String sellerUsername, ArrayList<Product> products, ArrayList<Sale> sales) {
         this.storeFrontName = storeFrontName;
         this.sellerUsername = sellerUsername;
@@ -145,9 +151,11 @@ public class StoreFront {
         for (int i = 0; i < products.size(); i++) {
             storefront += "-" + products.get(i) + "\n";
         }
-        storefront += ">" + sales.get(0);
-        for (int i = 1; i < sales.size(); i++) {
-            storefront += ";" + sales.get(i);
+        if (sales.size() > 0) {
+            storefront += ">" + sales.get(0);
+            for (int i = 1; i < sales.size(); i++) {
+                storefront += ";" + sales.get(i);
+            }
         }
         return storefront;
     }
@@ -256,4 +264,17 @@ public class StoreFront {
     public void addProduct(Product p) {
         products.add(p);
     }
+
+    public void printProducts() {
+        for (int i = 0; i < products.size(); i++) {
+            System.out.println(products.get(i));
+        }
+    }
+
+    public void printSales() {
+        for (int i = 0; i < sales.size(); i++) {
+            System.out.println(sales.get(i));
+        }
+    }
+
 }

@@ -144,10 +144,10 @@ public class Marketplace {
         ArrayList<Product> sortedList = (ArrayList<Product>) allProducts.clone();
 
         if (sortValue.equalsIgnoreCase("price")) {
-            Collections.sort(sortedList, Product.priceCompare(desc));
+            //Collections.sort(sortedList, Product.priceCompare(desc));
         }
         if (sortValue.equalsIgnoreCase("quantity")) {
-            Collections.sort(sortedList, Product.availabilityCompare(desc));
+            //Collections.sort(sortedList, Product.availabilityCompare(desc));
         }
 
         return sortedList;

@@ -1,4 +1,5 @@
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class Seller extends User {
@@ -22,13 +23,22 @@ public class Seller extends User {
     Add Store:
     This function allows a seller to create a new storeFront
      */
-    public void addStore(String storeFrontName, String sellerUserName) {
-        StoreFront storeFront = new StoreFront(storeFrontName, sellerUserName);
+    public void addStore(String storeFrontName, String sellerUserName, ArrayList<Product> products) {
+        StoreFront storeFront = new StoreFront(storeFrontName, sellerUserName, products);
         storeFronts.add(storeFront);
+        ArrayList<Sale> sales = new ArrayList<>();
+        Sale sale = new Sale(null, null, 0, 0);
+        sales.add(sale);
+        storeFront.setSales(sales);
+        storeFront.setProducts(products);
     }
 
     public void printStoreFronts() {
-
+        int count = 1;
+        for (int i = 0; i < storeFronts.size(); i++) {
+            System.out.println(count + ". " + storeFronts.get(i).getStoreFrontName());
+            count++;
+        }
     }
 
     /*
