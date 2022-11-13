@@ -131,9 +131,11 @@ public class StoreFront {
         ArrayList<Map<String, Integer>> list = new ArrayList<>();
         boolean newProduct = true;
         for (int i = 0; i < sales.size(); i++) {
+            Sale s = sales.get(i);
             for (int j = 0; j < list.size(); j++) {
-                if (list.get(j).containsKey(sales.get(i).getProductName())) {
-                    list.get(j).put(sales.get(i).getProductName(), list.get(j).get(sales.get(i).getProductName()) + sales.get(i).getQuantity());
+                Map<String, Integer> m = list.get(j);
+                if (m.containsKey(s.getProductName())) {
+                    m.put(s.getProductName(), m.get(s.getProductName()) + s.getQuantity());
                     newProduct = false;
                 }
             }
