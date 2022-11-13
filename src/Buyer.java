@@ -61,6 +61,9 @@ public class Buyer extends User {
             }
             if (lines.get(i).charAt(0) == '>') {
                 tempSalesArray = lines.get(i).substring(1).split(";");
+                // if no purchases logged
+                if (tempSalesArray.length != 4)
+                    return;
                 for (int k = 0; k < tempSalesArray.length; k++) {
                     tempSalesFields = tempSalesArray[k].split(",");
                     purchases.add(new Sale(tempSalesFields[0], tempSalesFields[1], Integer.parseInt(tempSalesFields[2]), Double.parseDouble(tempSalesFields[3])));
