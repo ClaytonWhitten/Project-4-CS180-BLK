@@ -5,7 +5,7 @@ public class Buyer extends User {
 
     private String name;
     private ArrayList<Product> shoppingCart;
-    private ArrayList<Integer> cartQuanitities;
+    private ArrayList<Integer> cartQuantities;
 
     private ArrayList<Sale> purchases;
 
@@ -47,26 +47,27 @@ public class Buyer extends User {
             }
         }
 
-        String[] tempProductFields;
+        //tempproductfields
+        String[] tpf;
         String[] tempSalesArray;
-        String[] tempSalesFields;
+        //tempsalesfields
+        String[] tsf;
 
         for (int i = 0; i < lines.size(); i++) {
             if (lines.get(i).charAt(0) == '-') {
-                tempProductFields = lines.get(i).split("::");
-                shoppingCart.add(new Product(tempProductFields[0], tempProductFields[1], tempProductFields[2], Integer.parseInt(tempProductFields[3]), Double.parseDouble(tempProductFields[4]), Integer.parseInt(tempProductFields[5])));
+                tpf = lines.get(i).split("::");
+                shoppingCart.add(new Product(tpf[0], tpf[1], tpf[2], Integer.parseInt(tpf[3]), 
+                    Double.parseDouble(tpf[4]), Integer.parseInt(tpf[5])));
             }
             if (lines.get(i).charAt(0) == '=') {
-                cartQuanitities.add(Integer.parseInt(lines.get(i).substring(1)));
+                cartQuantities.add(Integer.parseInt(lines.get(i).substring(1)));
             }
             if (lines.get(i).charAt(0) == '>') {
                 tempSalesArray = lines.get(i).substring(1).split(";");
-                // if no purchases logged
-                if (tempSalesArray.length != 4)
-                    return;
                 for (int k = 0; k < tempSalesArray.length; k++) {
-                    tempSalesFields = tempSalesArray[k].split(",");
-                    purchases.add(new Sale(tempSalesFields[0], tempSalesFields[1], Integer.parseInt(tempSalesFields[2]), Double.parseDouble(tempSalesFields[3])));
+                    tsf = tempSalesArray[k].split(",");
+                    purchases.add(new Sale(tsf[0], tsf[1], Integer.parseInt(tsf[2]), 
+                        Double.parseDouble(tsf[3])));
                 }
             }
         }
@@ -86,15 +87,38 @@ public class Buyer extends User {
             pw.println("*****");
             for (int i = 0; i < shoppingCart.size(); i++) {
                 pw.println("-" + shoppingCart.get(i));
-                pw.println("=" + cartQuanitities.get(i));
+                pw.println("=" + cartQuantities.get(i));
             }
             pw.println("*****");
-            pw.print(">");
             if (purchases.size() > 0) {
-                pw.print(purchases.get(0).getCustomerInfo() + "," + purchases.get(0).getProductName() + "," + purchases.get(0).getQuantity() + "," + purchases.get(0).getRevenue());
-                for (int i = 1; i < purchases.size(); i++) {
-                    pw.println(";" + purchases.get(i).getCustomerInfo() + "," + purchases.get(i).getProductName() + "," + purchases.get(i).getQuantity() + "," + purchases.get(i).getRevenue());
+                pw.print(">");
+                for (int i = 0; i < purchases.size(); i++) {
+                    Sale s = purchases.get(i);
+                    pw.println("".format((i != 0 ? ";" : "") + "%s,%s,%d,%.2f", s.getCustomerInfo(), 
+                        s.getProductName(), s.getQuantity(), s.getRevenue()));
                 }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (pw != null) {
+                try {
+                    pw.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void exportPurchaseList(String fileName) {
+        PrintWriter pw = null;;
+        try {
+            File f = new File(fileName);
+            FileOutputStream fos = new FileOutputStream(f, false);
+            pw = new PrintWriter(fos);
+            for (int i = 0; i < purchases.size(); i++) {
+                pw.println(purchases.get(i));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -111,6 +135,38 @@ public class Buyer extends User {
 
     public void addToCart(Product product, int quantity) {
         shoppingCart.add(product);
-        cartQuanitities.add(quantity);
+        cartQuantities.add(quantity);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ArrayList<Product> getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(ArrayList<Product> shoppingCart) {
+        this.shoppingCart = shoppingCart;
+    }
+
+    public ArrayList<Integer> getCartQuantities() {
+        return cartQuantities;
+    }
+
+    public void setCartQuantities(ArrayList<Integer> cartQuantities) {
+        this.cartQuantities = cartQuantities;
+    }
+
+    public ArrayList<Sale> getPurchases() {
+        return purchases;
+    }
+
+    public void setPurchases(ArrayList<Sale> purchases) {
+        this.purchases = purchases;
     }
 }

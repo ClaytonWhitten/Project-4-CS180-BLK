@@ -19,7 +19,7 @@ import java.util.UUID;
 
 import static org.junit.Assert.*;
 
-public class TestUserBuyerSeller {
+public class Tests {
     private final PrintStream originalOutput = System.out;
     private final InputStream originalSysin = System.in;
 
@@ -82,9 +82,40 @@ public class TestUserBuyerSeller {
 
         assertTrue(seller.login());
 
+        // cleanup files
         File file1 = new File("User1.txt");
         file1.delete();
         File file2 = new File("User2.txt");
+        file2.delete();
+        File file3 = new File("sellers.txt");
+        file3.delete();
+    }
+
+    @Test(timeout = 1000)
+    public void userPersistence() {
+        String username1 = "TheBuyer";
+        String pass1 = "Pass1";
+        String username2 = "TheSeller";
+        String pass2 = "Pass2";
+        User user1 = new User(username1, pass1, "buyer");
+        User user2 = new User(username2, pass2, "seller");
+
+        String name = "John Doe";
+
+        Buyer buyer = new Buyer(user1, name);
+        Seller seller = new Seller(user2);
+        buyer.login();
+        seller.login();
+
+        // do some stuff that should persist
+        buyer.addToCart(new Product("PRODUCTA", 
+            "STOREA", "DESCA", 100, 2.49), 1);
+
+
+        // cleanup files
+        File file1 = new File("TheBuyer.txt");
+        file1.delete();
+        File file2 = new File("TheSeller.txt");
         file2.delete();
         File file3 = new File("sellers.txt");
         file3.delete();

@@ -276,5 +276,4 @@ public class StoreFront {
             System.out.println(sales.get(i));
         }
     }
-
 }
