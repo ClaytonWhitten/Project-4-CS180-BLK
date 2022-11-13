@@ -87,9 +87,11 @@ public class Buyer extends User {
             }
             pw.println("*****");
             pw.print(">");
-            pw.print(purchases.get(0).getCustomerInfo() + "," + purchases.get(0).getProductName() + "," + purchases.get(0).getQuantity() + "," + purchases.get(0).getRevenue());
-            for (int i = 1; i < purchases.size(); i++) {
-                pw.println(";" + purchases.get(i).getCustomerInfo() + "," + purchases.get(i).getProductName() + "," + purchases.get(i).getQuantity() + "," + purchases.get(i).getRevenue());
+            if (purchases.size() > 0) {
+                pw.print(purchases.get(0).getCustomerInfo() + "," + purchases.get(0).getProductName() + "," + purchases.get(0).getQuantity() + "," + purchases.get(0).getRevenue());
+                for (int i = 1; i < purchases.size(); i++) {
+                    pw.println(";" + purchases.get(i).getCustomerInfo() + "," + purchases.get(i).getProductName() + "," + purchases.get(i).getQuantity() + "," + purchases.get(i).getRevenue());
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
