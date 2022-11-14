@@ -269,13 +269,13 @@ public class StoreFront {
 
     public void printProducts() {
         for (int i = 0; i < products.size(); i++) {
-            System.out.println(products.get(i));
+            System.out.println((i+1) + ". " + products.get(i));
         }
     }
 
     public void printSales() {
         for (int i = 0; i < sales.size(); i++) {
-            System.out.println(sales.get(i));
+            System.out.println((i+1) + ". " + sales.get(i));
         }
     }
 }

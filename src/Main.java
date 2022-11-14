@@ -169,10 +169,66 @@ public class Main {
                                                 }
 
                                             } else if (storeFrontOptions == 2) { // user wants to edit products
-                                                System.out.println("Product format:");
-                                                System.out.println("name::storeFrontName::description::availableQuantity::price");
-                                                seller.getStoreFronts().get(storeSelection - 1).printProducts();
-                                                // TODO
+                                                int productOptions;
+                                                do {
+                                                    System.out.printf("1. Choose product\n2. Add product\n3. Back\n");
+                                                    productOptions = scan.nextInt();
+                                                    scan.nextLine();
+                                                } while (productOptions != 1 && productOptions != 2 && productOptions != 3);
+
+                                                int productSelection;
+                                                if (productOptions == 1) { // user wants to choose a product
+                                                    System.out.println(seller.getStoreFronts().get(storeSelection - 1).getProducts());
+                                                    System.out.println("Product format:");
+                                                    System.out.println("name::storeFrontName::description::availableQuantity::price::amountInCarts");
+                                                    do {
+                                                        seller.getStoreFronts().get(storeSelection - 1).printProducts();
+                                                        productSelection = scan.nextInt();
+                                                        scan.nextLine();
+                                                    } while (productSelection < 1 && productSelection > seller.getStoreFronts().get(storeSelection - 1).getProducts().size());
+
+                                                    System.out.println("What is the name of the product?");
+                                                    String productName = scan.nextLine();
+                                                    seller.getStoreFronts().get(storeSelection - 1).getProducts().get(productSelection - 1).setName(productName);
+                                                    System.out.printf("Give a short description of %s\n", productName);
+                                                    String productDescription = scan.nextLine();
+                                                    seller.getStoreFronts().get(storeSelection - 1).getProducts().get(productSelection - 1).setDescription(productDescription);
+                                                    System.out.printf("What quantity of %s will be available?\n", productName);
+                                                    int availableQuantity = scan.nextInt();
+                                                    scan.nextLine();
+                                                    seller.getStoreFronts().get(storeSelection - 1).getProducts().get(productSelection - 1).setAvailableQuantity(availableQuantity);
+                                                    System.out.printf("How much will %s cost?\n", productName);
+                                                    double productPrice = scan.nextDouble();
+                                                    scan.nextLine();
+                                                    seller.getStoreFronts().get(storeSelection - 1).getProducts().get(productSelection - 1).setPrice(productPrice);
+                                                    System.out.println("Product edited!");
+                                                    back = true;
+                                                    continue;
+
+                                                } else if (productOptions == 2) { // user wants to add a product
+
+                                                    System.out.println("What is the name of the product?");
+                                                    String productName = scan.nextLine();
+                                                    System.out.printf("Give a short description of %s\n", productName);
+                                                    String productDescription = scan.nextLine();
+                                                    System.out.printf("What quantity of %s will be available?\n", productName);
+                                                    int availableQuantity = scan.nextInt();
+                                                    scan.nextLine();
+                                                    System.out.printf("How much will %s cost?\n", productName);
+                                                    double productPrice = scan.nextDouble();
+                                                    scan.nextLine();
+                                                    Product product = new Product(productName, seller.getStoreFronts().get(storeSelection - 1).getStoreFrontName(),
+                                                        productDescription, availableQuantity, productPrice);
+                                                    seller.getStoreFronts().get(storeSelection - 1).addProduct(product);
+                                                    System.out.println("Product added!");
+                                                    back = true;
+                                                    continue;
+
+                                                } else if (productOptions == 3) {
+                                                    back = true;
+                                                    continue;
+                                                }
+
                                             } else if (storeFrontOptions == 3) { // user wants to view history of sales
                                                 int viewHistOrBack;
                                                 do {
@@ -185,7 +241,8 @@ public class Main {
                                                 } while (viewHistOrBack == 1 || (viewHistOrBack != 1 && viewHistOrBack != 2));
 
                                                 if (viewHistOrBack == 2) {
-
+                                                    back = true;
+                                                    continue;
                                                 }
 
                                             } else if (storeFrontOptions == 4) { // user wants to go back
