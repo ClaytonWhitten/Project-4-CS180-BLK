@@ -85,6 +85,7 @@ public class StoreFront {
                     return null;
                 } else {
                     p.setAvailableQuantity(p.getAvailableQuantity() - quantity);
+                    p.decrementCartNum(quantity);
                     sale = new Sale(buyer.getUsername(), productName, quantity, p.getPrice() * quantity);
                 }
 
@@ -96,59 +97,55 @@ public class StoreFront {
     }
 
 
-    public ArrayList<Map<String, Integer>> getDataByCustomer() {
-        ArrayList<Map<String, Integer>> list = new ArrayList<>();
-        boolean newCustomer = true;
+    public HashMap<String, Integer> getDataByCustomer() {
+        HashMap<String, Integer> map = new HashMap<>();
+        int num = 0;
         for (int i = 0; i < sales.size(); i++) {
             Sale s = sales.get(i);
-            for (int j = 0; j < list.size(); j++) {
-                Map<String, Integer> m = list.get(j);
-                if (m.containsKey(s.getCustomerInfo())) {
-                    m.put(s.getCustomerInfo(), m.get(s.getCustomerInfo()) + s.getQuantity());
-                    newCustomer = false;
+            if (s.getQuantity() != 0) {
+                if (map.containsKey(sales.get(i).getCustomerInfo())) {
+                    num = map.get(sales.get(i).getCustomerInfo());
+                    map.put(sales.get(i).getCustomerInfo(), num + sales.get(i).getQuantity());
+                } else {
+                    map.put(sales.get(i).getCustomerInfo(), sales.get(i).getQuantity());
                 }
             }
-            if (newCustomer) {
-                list.add(Map.of(s.getCustomerInfo(), s.getQuantity()));
-            }
         }
-        return list;
+        return map;
     }
 
     public void printDataByCustomer() {
-        ArrayList<Map<String, Integer>> list = getDataByCustomer();
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println("Customer: " + list.get(i).keySet());
-            System.out.println("Number of Items Purchased: " + list.get(i).get(list.get(i).keySet()));
+        HashMap<String, Integer> map = getDataByCustomer();
+        for (String key: map.keySet()) {
+            System.out.println("Customer: " + key);
+            System.out.println("Number of Items Purchased: " + map.get(key));
             System.out.println();
         }
     }
 
 
-    public ArrayList<Map<String, Integer>> getDataByProduct() {
-        ArrayList<Map<String, Integer>> list = new ArrayList<>();
-        boolean newProduct = true;
+    public HashMap<String, Integer> getDataByProduct() {
+        HashMap<String, Integer> map = new HashMap<>();
+        int num = 0;
         for (int i = 0; i < sales.size(); i++) {
             Sale s = sales.get(i);
-            for (int j = 0; j < list.size(); j++) {
-                Map<String, Integer> m = list.get(j);
-                if (m.containsKey(s.getProductName())) {
-                    m.put(s.getProductName(), m.get(s.getProductName()) + s.getQuantity());
-                    newProduct = false;
+            if (s.getQuantity() != 0) {
+                if (map.containsKey(sales.get(i).getProductName())) {
+                    num = map.get(sales.get(i).getProductName());
+                    map.put(sales.get(i).getProductName(), num + sales.get(i).getQuantity());
+                } else {
+                    map.put(sales.get(i).getProductName(), sales.get(i).getQuantity());
                 }
             }
-            if (newProduct) {
-                list.add(Map.of(sales.get(i).getProductName(), sales.get(i).getQuantity()));
-            }
         }
-        return list;
+        return map;
     }
 
     public void printDataByProduct() {
-        ArrayList<Map<String, Integer>> list = getDataByProduct();
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println("Product: " + list.get(i).keySet());
-            System.out.println("Quantity Sold: " + list.get(i).get(list.get(i).keySet()));
+        HashMap<String, Integer> map = getDataByProduct();
+        for (String key: map.keySet()) {
+            System.out.println("Product: " + key);
+            System.out.println("Quantity Sold: " + map.get(key));
             System.out.println();
         }
     }
