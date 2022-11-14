@@ -43,3 +43,13 @@ to do for this class was to verify that the getter, setters, and toString worked
 The Storefront class is meant to be a store that is created by a Seller and holds multiple products in a list (Product class) along with a list of purchase history of that storefront (Sale class). 
 Naturally, the class interacts with product and sale, however it also interacts with Marketplace and therefore, indirectly with us. The way we test the methods in this class is through testing the Marketplace
 class's methods along with this method's print methods and such. Finally we also had to make sure that the storefronts were being properly added to a seller's file.
+
+### Marketplace:
+The Marketplace class acts as the means for a buyer to interact with storefronts made by sellers. The class contains methods that allow 
+buyers to use the program. Testing for this class was conducted through the use of print methods. The methods in Marketplace are called 
+in the main method.
+
+### Main:
+The Main class contains the main method and is where the application is run. It calls methods from all the other classes in order to allow
+users to use the marketplace. After logging in or signing up, sellers and buyers are able to and then either set up stores and list products 
+or buy items from stores that already exist, respectively. This class is tested through print statements and verifying it put out the desired results.
