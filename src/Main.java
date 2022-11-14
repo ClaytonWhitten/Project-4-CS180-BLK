@@ -548,6 +548,7 @@ public class Main {
                                                                             marketplace.addToCart(buyer,
                                                                                     currentList.get(selectedProduct
                                                                                             - 1), quantityDesired);
+                                                                            System.out.println("Added");
                                                                         } else {
                                                                             check2 = false;
                                                                         }
@@ -687,6 +688,7 @@ public class Main {
                                                                                                     selectedProduct
                                                                                                             - 1),
                                                                                             quantityDesired);
+                                                                                    System.out.println("Added");
                                                                                 } else {
                                                                                     check3 = false;
                                                                                     System.out.println("Try again");
@@ -857,6 +859,7 @@ public class Main {
                                                                                             currentList.get(searchInt
                                                                                                     - 1),
                                                                                             quantityDesired);
+                                                                                    System.out.println("Added");
                                                                                 } else {
                                                                                     check3 = false;
                                                                                 }
@@ -986,6 +989,7 @@ public class Main {
                                                     if (cartSelection == 1) { // checking out
                                                         viewCart = false;
                                                         marketplace.buyCart(buyer);
+                                                        System.out.println("Bought");
                                                     } else if (cartSelection == 2) { // removing product
                                                         do {
                                                             System.out.println("Which product: ");
@@ -999,6 +1003,7 @@ public class Main {
                                                                          i++) {
                                                                         if (i == cartProduct - 1) {
                                                                             buyer.removeFromCart(i);
+                                                                            System.out.println("Removed");
                                                                         }
                                                                     }
                                                                     productSelection = false;
@@ -1091,6 +1096,7 @@ public class Main {
                                             try {
                                                 buyer.exportPurchaseList(scan.nextLine());
                                                 works = true;
+                                                System.out.println("Exported");
                                             } catch (Exception e) {
                                                 System.out.println("Try again");
                                                 works = false;
