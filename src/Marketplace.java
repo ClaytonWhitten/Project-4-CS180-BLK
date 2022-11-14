@@ -81,6 +81,12 @@ public class Marketplace {
         return sale;
     }
 
+    public void buyCart(Buyer buyer) {
+        for (int i = 0; i < buyer.getShoppingCart().size(); i++) {
+            buyer.addSale(buyItem(buyer, buyer.getShoppingCart().get(i).getStoreFrontName(), buyer.getShoppingCart().get(i).getName(), buyer.getCartQuantities().get(i)));
+        }
+    }
+
     public boolean addToCart(Buyer buyer, Product product, int quantity) {
         for (int i = 0; i < allSellers.size(); i++) {
             Seller s = allSellers.get(i);

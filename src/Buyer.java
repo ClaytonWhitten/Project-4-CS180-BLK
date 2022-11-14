@@ -171,4 +171,7 @@ public class Buyer extends User {
         this.purchases = purchases;
     }
 
+    public void addSale(Sale sale) {
+        purchases.add(sale);
+    }
 }
