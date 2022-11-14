@@ -187,7 +187,7 @@ public class Main {
                                                 } catch (Exception e) {
                                                     System.out.println("Please enter an integer!");
                                                 }
-                                            } while (storeFrontOptions != 1 && storeFrontOptions != 2 && storeFrontOptions != 3 && storeFrontOptions != 4 && storeFrontOptions != 5 && storeFrontOptions != 6);
+                                            } while (storeFrontOptions != 1 && storeFrontOptions != 2 && storeFrontOptions != 3 && storeFrontOptions != 4 && storeFrontOptions != 5 && storeFrontOptions != 6 && storeFrontOptions != 7);
 
                                             if (storeFrontOptions == 1) { // user wants to import a list of products
                                                 int fileOrBack = 0;

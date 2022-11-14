@@ -230,6 +230,14 @@ public class Marketplace {
         }
     }
 
+    public ArrayList<StoreFront> sortStores(boolean desc, ArrayList<StoreFront> list) {
+        ArrayList<StoreFront> sortedList = (ArrayList<StoreFront>) list.clone();
+
+        Collections.sort(sortedList, StoreFront.salesCompare(desc));
+
+        return sortedList;
+    }
+
     public ArrayList<StoreFront> getStoresWithBuyerPurchase(Buyer buyer) {
         ArrayList<StoreFront> list = new ArrayList<>();
         for (int i = 0; i < allStores.size(); i++) {
