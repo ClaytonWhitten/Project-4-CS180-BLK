@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.*;
 
 public class Main {
@@ -58,7 +59,6 @@ public class Main {
 
                         if (user.getType().equals("seller")) { // marketplace for sellers
                             Seller seller = new Seller(user);
-
 
                             if (seller.getStoreFronts().isEmpty()) { // the seller has no stores
 
@@ -288,7 +288,6 @@ public class Main {
                                         storeFrontOptions = 4;
 
                                     } else if (sellerOptions == 3) { // user logs out
-                                        seller.logOut();
                                         choice = 3;
                                         break;
                                     }
