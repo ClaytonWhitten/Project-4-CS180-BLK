@@ -727,50 +727,72 @@ public class Main {
                                         continue;
                                     } else if (selectedStore == marketplace.getAllStores().size() + 3) { // user selected to view cart
                                         boolean viewCart = true;
+                                        boolean numCheck = true;
+                                        int num;
                                         do {
-                                            buyer.printCart();
-                                            System.out.println("-----------------------");
-                                            System.out.println("1. Checkout");
-                                            System.out.println("2. Remove product");
-                                            System.out.println("3. Back");
-                                            boolean productSelection = false;
-                                            try {
-                                                int cartSelection = Integer.parseInt(scan.nextLine());
-                                                if (cartSelection == 1) { // checking out
-                                                    viewCart = false;
-                                                    marketplace.buyCart(buyer);
-                                                } else if (cartSelection == 2) { // removing product
-                                                    do {
-                                                        System.out.println("Which product: ");
-                                                        buyer.printCart();
-                                                        try {
-                                                            int cartProduct = Integer.parseInt(scan.nextLine());
-                                                            if (cartProduct >= 1 && cartProduct <= buyer.getShoppingCart().size()) {
-                                                                for (int i = 0; i < buyer.getShoppingCart().size(); i++) {
-                                                                    if (i == cartProduct - 1) {
-                                                                        buyer.removeFromCart(i);
+                                            if (buyer.getShoppingCart().size() == 0) {
+                                                System.out.println("Cart is Empty");
+                                                do {
+                                                    System.out.println("1. Back");
+                                                    try {
+                                                        num = Integer.parseInt(scan.nextLine());
+                                                        if (num == 1) {
+                                                            numCheck = true;
+                                                            viewCart = false;
+                                                        } else {
+                                                            numCheck = false;
+                                                            System.out.println("Try again");
+                                                        }
+                                                    } catch (Exception e) {
+                                                        numCheck = false;
+                                                        System.out.println("Try again");
+                                                    }
+                                                } while (numCheck == false);
+                                            } else {
+                                                buyer.printCart();
+                                                System.out.println("-----------------------");
+                                                System.out.println("1. Checkout");
+                                                System.out.println("2. Remove product");
+                                                System.out.println("3. Back");
+                                                boolean productSelection = false;
+                                                try {
+                                                    int cartSelection = Integer.parseInt(scan.nextLine());
+                                                    if (cartSelection == 1) { // checking out
+                                                        viewCart = false;
+                                                        marketplace.buyCart(buyer);
+                                                    } else if (cartSelection == 2) { // removing product
+                                                        do {
+                                                            System.out.println("Which product: ");
+                                                            buyer.printCart();
+                                                            try {
+                                                                int cartProduct = Integer.parseInt(scan.nextLine());
+                                                                if (cartProduct >= 1 && cartProduct <= buyer.getShoppingCart().size()) {
+                                                                    for (int i = 0; i < buyer.getShoppingCart().size(); i++) {
+                                                                        if (i == cartProduct - 1) {
+                                                                            buyer.removeFromCart(i);
+                                                                        }
                                                                     }
+                                                                    productSelection = false;
+                                                                } else {
+                                                                    System.out.println("Try again");
+                                                                    productSelection = true;
                                                                 }
-                                                                productSelection = false;
-                                                            } else {
+                                                            } catch (Exception e) {
                                                                 System.out.println("Try again");
                                                                 productSelection = true;
                                                             }
-                                                        } catch (Exception e) {
-                                                            System.out.println("Try again");
-                                                            productSelection = true;
-                                                        }
-                                                    } while (productSelection == true);
-                                                    viewCart = true;
-                                                } else if (cartSelection == 3) { // going back
-                                                    viewCart = false;
-                                                } else {
+                                                        } while (productSelection == true);
+                                                        viewCart = true;
+                                                    } else if (cartSelection == 3) { // going back
+                                                        viewCart = false;
+                                                    } else {
+                                                        System.out.println("Try again");
+                                                        viewCart = true;
+                                                    }
+                                                } catch (Exception e) {
                                                     System.out.println("Try again");
                                                     viewCart = true;
                                                 }
-                                            } catch (Exception e) {
-                                                System.out.println("Try again");
-                                                viewCart = true;
                                             }
                                         } while (viewCart == true);
 
