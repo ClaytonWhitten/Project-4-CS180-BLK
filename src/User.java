@@ -37,7 +37,7 @@ public class User {
             bw.close();
             if (type.equalsIgnoreCase("seller")) {
                 try {
-                    BufferedWriter bw2 = new BufferedWriter(new FileWriter(sellersFile));
+                    BufferedWriter bw2 = new BufferedWriter(new FileWriter(sellersFile, true));
                     bw2.write(username + "\n");
                     bw2.close();
                 } catch (IOException e) {
