@@ -57,3 +57,7 @@ in the main method.
 The Main class contains the main method and is where the application is run. It calls methods from all the other classes in order to allow
 users to use the marketplace. After logging in or signing up, sellers and buyers are able to and then either set up stores and list products 
 or buy items from stores that already exist, respectively. This class is tested through print statements and verifying it put out the desired results.
+
+### Tests:
+The Tests class contains all of the JUnit tests for various components of the program. A more thorough outline of its tests can be found
+in Hamilton's part 2 project report.

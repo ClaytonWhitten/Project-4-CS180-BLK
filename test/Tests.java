@@ -25,6 +25,14 @@ import java.util.UUID;
 
 import static org.junit.Assert.*;
 
+/**
+* Tests
+*
+* JUnit tests class
+*
+* @author Hamilton Wang, L15
+* @version 2022-11-14
+*/
 public class Tests {
     private final PrintStream originalOutput = System.out;
     private final InputStream originalSysin = System.in;
