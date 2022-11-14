@@ -318,4 +318,9 @@ public class StoreFront {
         }
         return sum;
     }
+
+    public static Comparator<StoreFront> salesCompare(boolean desc) {
+        return (StoreFront a, StoreFront b) ->
+                (desc ? -1 : 1) * Integer.compare(a.totalSales(), b.totalSales());
+    }
 }
