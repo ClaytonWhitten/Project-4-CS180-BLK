@@ -26,7 +26,8 @@ public class Product {
         this.numAddedToCarts = 0;
     }
 
-    public Product(String name, String storeFrontName, String description, int availableQuantity, double price, int numAddedToCarts) {
+    public Product(String name, String storeFrontName, String description,
+                   int availableQuantity, double price, int numAddedToCarts) {
         this.name = name;
         this.storeFrontName = storeFrontName;
         this.description = description;

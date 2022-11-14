@@ -233,7 +233,7 @@ public class StoreFront {
     }
 
     public void exportProductsList(String fileName) {
-        PrintWriter pw = null;;
+        PrintWriter pw = null;
         try {
             File f = new File(fileName);
             FileOutputStream fos = new FileOutputStream(f, false);
@@ -299,7 +299,7 @@ public class StoreFront {
 
     public void printProducts() {
         for (int i = 0; i < products.size(); i++) {
-            System.out.println((i+1) + ". " + products.get(i));
+            System.out.println((i + 1) + ". " + products.get(i));
         }
     }
 

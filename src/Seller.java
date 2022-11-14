@@ -91,23 +91,26 @@ public class Seller extends User {
             if (lines.get(i).equalsIgnoreCase("*****")) {
                 tempProductsList = new ArrayList<>();
                 tempSalesList = new ArrayList<>();
-                for (int j = i+1; j < lines.size(); j++) {
-                    if (j == i+1) {
+                for (int j = i + 1; j < lines.size(); j++) {
+                    if (j == i + 1) {
                         tempStorefrontName = lines.get(j);
                     }
                     if (lines.get(j).charAt(0) == '-') {
                         tpf = lines.get(j).substring(1).split("::");
-                        tempProductsList.add(new Product(tpf[0], tpf[1], tpf[2], Integer.parseInt(tpf[3]), Double.parseDouble(tpf[4]), Integer.parseInt(tpf[5])));
+                        tempProductsList.add(new Product(tpf[0], tpf[1], tpf[2], Integer.parseInt(tpf[3]),
+                                Double.parseDouble(tpf[4]), Integer.parseInt(tpf[5])));
                     }
                     if (lines.get(j).charAt(0) == '>') {
                         tempSalesArray = lines.get(j).substring(1).split(";");
                         for (int k = 0; k < tempSalesArray.length; k++) {
                             tsf = tempSalesArray[k].split(",");
-                            tempSalesList.add(new Sale(tsf[0], tsf[1], Integer.parseInt(tsf[2]), Double.parseDouble(tsf[3])));
+                            tempSalesList.add(new Sale(tsf[0], tsf[1], Integer.parseInt(tsf[2]),
+                                    Double.parseDouble(tsf[3])));
                         }
                     }
                     if (lines.get(j).equalsIgnoreCase("*****")) {
-                        storeFronts.add(new StoreFront(tempStorefrontName, super.getUsername(), (ArrayList<Product>) tempProductsList.clone(), (ArrayList<Sale>) tempSalesList.clone()));
+                        storeFronts.add(new StoreFront(tempStorefrontName, super.getUsername(),
+                                (ArrayList<Product>) tempProductsList.clone(), (ArrayList<Sale>) tempSalesList.clone()));
                         tempProductsList.clear();
                         tempSalesList.clear();
                         i = j;
@@ -123,7 +126,7 @@ public class Seller extends User {
     This function is called at the end of a user's session and re-writes any updated data back into their data file
      */
     public void logOut() {
-        PrintWriter pw = null;;
+        PrintWriter pw = null;
         try {
             File f = new File(super.getUsername() + ".txt");
             FileOutputStream fos = new FileOutputStream(f, false);
