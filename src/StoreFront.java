@@ -15,6 +15,12 @@ public class StoreFront {
         this.sales = new ArrayList<>();
     }
 
+    public StoreFront(String storeFrontName, String sellerUsername, ArrayList<Product> products) {
+      this.storeFrontName = storeFrontName;
+      this.sellerUsername = sellerUsername;
+      this.products = products;
+    }
+
     public StoreFront(String storeFrontName, String sellerUsername, ArrayList<Product> products, ArrayList<Sale> sales) {
         this.storeFrontName = storeFrontName;
         this.sellerUsername = sellerUsername;
@@ -76,7 +82,8 @@ public class StoreFront {
 
             }
         }
-        sales.add(sale);
+        if (sale != null)
+            sales.add(sale);
         return sale;
     }
 
@@ -125,9 +132,11 @@ public class StoreFront {
         ArrayList<Map<String, Integer>> list = new ArrayList<>();
         boolean newProduct = true;
         for (int i = 0; i < sales.size(); i++) {
+            Sale s = sales.get(i);
             for (int j = 0; j < list.size(); j++) {
-                if (list.get(j).containsKey(sales.get(i).getProductName())) {
-                    list.get(j).put(sales.get(i).getProductName(), list.get(j).get(sales.get(i).getProductName()) + sales.get(i).getQuantity());
+                Map<String, Integer> m = list.get(j);
+                if (m.containsKey(s.getProductName())) {
+                    m.put(s.getProductName(), m.get(s.getProductName()) + s.getQuantity());
                     newProduct = false;
                 }
             }
@@ -257,5 +266,17 @@ public class StoreFront {
 
     public void addProduct(Product p) {
         products.add(p);
+    }
+
+    public void printProducts() {
+        for (int i = 0; i < products.size(); i++) {
+            System.out.println((i+1) + ". " + products.get(i));
+        }
+    }
+
+    public void printSales() {
+        for (int i = 0; i < sales.size(); i++) {
+            System.out.println((i+1) + ". " + sales.get(i));
+        }
     }
 }
