@@ -909,7 +909,7 @@ public class Main {
                         user = new User(newUsername, newPassword, agentType);
 
                         if (user.signUp()) {
-                            System.out.println("Please restart the program to register your account");
+                            System.out.println("Restarting the program to register your account...");
                             choice = 3;
                             break;
                         } else {
