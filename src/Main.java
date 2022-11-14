@@ -921,10 +921,10 @@ public class Main {
                                                         try {
                                                             int sorter = Integer.parseInt(scan.nextLine());
                                                             if (sorter == 1) {
-                                                                
+                                                                currentList = marketplace.sortStores(false, currentList);
                                                                 sortDatabase = true;
                                                             } else if (sorter == 2) {
-
+                                                                currentList = marketplace.sortStores(true, currentList);
                                                                 sortDatabase = true;
                                                             } else if (sorter == 3) {
                                                                 sortDatabase = false;
