@@ -98,6 +98,14 @@ public class Product {
             (desc ? -1 : 1) * Integer.compare(a.getAvailableQuantity(), a.getAvailableQuantity());
     }
 
+    public void printProductDetails() {
+        System.out.println("Name: " + name);
+        System.out.println("Store: " + storeFrontName);
+        System.out.println(description);
+        System.out.println("Quantity Available: " + availableQuantity);
+        System.out.printf("Price: $%.2f%n", price);
+    }
+
     @Override
     public String toString() {
         return "".format("%s::%s::%s::%d::%.2f::%d", name, storeFrontName, 
