@@ -1,5 +1,4 @@
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Seller extends User {
@@ -78,7 +77,6 @@ public class Seller extends User {
         //tempsalesfields
         String[] tsf;
         ArrayList<Sale> tempSalesList;
-        int count = 0;
         for (int i = 0; i < lines.size(); i++) {
             if (i == 0 && super.getPassword() == null) {
                 super.setPassword(lines.get(i).substring(0, lines.get(i).indexOf(";")));
@@ -92,19 +90,17 @@ public class Seller extends User {
                     }
                     if (lines.get(j).charAt(0) == '-') {
                         tpf = lines.get(j).split("::");
-                        tempProductsList.add(new Product(tpf[0].substring(1), tpf[1], tpf[2], Integer.parseInt(tpf[3]), Double.parseDouble(tpf[4]), Integer.parseInt(tpf[5])));
+                        tempProductsList.add(new Product(tpf[0], tpf[1], tpf[2], Integer.parseInt(tpf[3]), Double.parseDouble(tpf[4]), Integer.parseInt(tpf[5])));
                     }
                     if (lines.get(j).charAt(0) == '>') {
                         tempSalesArray = lines.get(j).substring(1).split(";");
                         for (int k = 0; k < tempSalesArray.length; k++) {
                             tsf = tempSalesArray[k].split(",");
-                            tempSalesList.add(new Sale(tsf[0].substring(1), tsf[1], Integer.parseInt(tsf[2]), Double.parseDouble(tsf[3])));
+                            tempSalesList.add(new Sale(tsf[0], tsf[1], Integer.parseInt(tsf[2]), Double.parseDouble(tsf[3])));
                         }
                     }
                     if (lines.get(j).equalsIgnoreCase("*****")) {
                         storeFronts.add(new StoreFront(tempStorefrontName, super.getUsername(), tempProductsList, tempSalesList));
-                        storeFronts.get(count).setProducts(tempProductsList);
-                        count++;
                         tempProductsList.clear();
                         tempSalesList.clear();
                         i = j;
@@ -142,6 +138,22 @@ public class Seller extends User {
                 }
             }
         }
+    }
+
+    public void updateSeller() throws IOException {
+        File file = new File(this.getUsername() + ".txt");
+        BufferedReader bfr = new BufferedReader(new FileReader(file));
+
+        String line = bfr.readLine();
+        bfr.readLine(); // skip first line
+        while (bfr.ready()) {
+            if (line.contains("*****")) {
+                while (bfr.readLine() != "*****") {
+
+                }
+            }
+        }
+
     }
 
     public ArrayList<StoreFront> getStoreFronts() {

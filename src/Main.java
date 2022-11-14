@@ -59,6 +59,7 @@ public class Main {
                         if (user.getType().equals("seller")) { // marketplace for sellers
                             Seller seller = new Seller(user);
 
+
                             if (seller.getStoreFronts().isEmpty()) { // the seller has no stores
 
                                 int createOrLogout;
@@ -164,6 +165,7 @@ public class Main {
                                                             // nothing
                                                         }
                                                     }
+                                                    seller.logOut();
                                                 } else if (fileOrBack == 2) {
                                                     back = true;
                                                 }
@@ -202,6 +204,7 @@ public class Main {
                                                     scan.nextLine();
                                                     seller.getStoreFronts().get(storeSelection - 1).getProducts().get(productSelection - 1).setPrice(productPrice);
                                                     System.out.println("Product edited!");
+                                                    seller.logOut();
                                                     back = true;
                                                     continue;
 
@@ -221,6 +224,7 @@ public class Main {
                                                         productDescription, availableQuantity, productPrice);
                                                     seller.getStoreFronts().get(storeSelection - 1).addProduct(product);
                                                     System.out.println("Product added!");
+                                                    seller.logOut();
                                                     back = true;
                                                     continue;
 

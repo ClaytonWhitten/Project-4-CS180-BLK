@@ -170,4 +170,5 @@ public class Buyer extends User {
     public void setPurchases(ArrayList<Sale> purchases) {
         this.purchases = purchases;
     }
+
 }
