@@ -82,7 +82,8 @@ public class StoreFront {
 
             }
         }
-        sales.add(sale);
+        if (sale != null)
+            sales.add(sale);
         return sale;
     }
 

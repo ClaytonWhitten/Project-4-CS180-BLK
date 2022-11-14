@@ -13,6 +13,7 @@ public class Buyer extends User {
         super(user.getUsername(), user.getPassword(), user.getType());
         this.name = name;
         shoppingCart = new ArrayList<>();
+        cartQuantities = new ArrayList<>();
         purchases = new ArrayList<>();
         readBuyerFile(user.getUsername() + ".txt");
     }
