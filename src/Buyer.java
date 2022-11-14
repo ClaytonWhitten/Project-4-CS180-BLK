@@ -34,7 +34,8 @@ public class Buyer extends User {
     }
     /*
     Read Buyer File:
-    This function just sets up the buyer object by updating its arraylist of purchases (Sale) and shopping cart (Product)
+    This function just sets up the buyer object by updating its arraylist
+    of purchases (Sale) and shopping cart (Product)
     - The function reads through the buyer's file and in accordance to the format I determined, sorts the data and adds
     it to the arraylists.
      */
@@ -93,7 +94,7 @@ public class Buyer extends User {
     This function is called at the end of a user's session and re-writes any updated data back into their data file
      */
     public void logOut() {
-        PrintWriter pw = null;;
+        PrintWriter pw = null;
         try {
             File f = new File(super.getUsername() + ".txt");
             FileOutputStream fos = new FileOutputStream(f, false);
@@ -127,7 +128,7 @@ public class Buyer extends User {
     }
 
     public void exportPurchaseList(String fileName) {
-        PrintWriter pw = null;;
+        PrintWriter pw = null;
         try {
             File f = new File(fileName);
             FileOutputStream fos = new FileOutputStream(f, false);

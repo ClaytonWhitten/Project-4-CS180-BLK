@@ -20,10 +20,13 @@ public class Marketplace {
     /*
     Initialize Marketplace:
     This function sets up the marketplace for a buyer to interact with doing the following steps:
-    - First it reads through the global sellers file sellers.txt to get a list of the usernames for all the sellers
+    - First it reads through the global sellers file sellers.txt to get a list of the usernames
+    for all the sellers
     - with these usernames the marketplace creates an arraylist of seller objects
-    - by initializing each seller, the marketplace automatically reads all of their files through the constructor for Seller
-    - By reading each seller's files, in the arraylist of seller objects each seller already has all their storefronts loaded
+    - by initializing each seller, the marketplace automatically reads all of their files through
+    the constructor for Seller
+    - By reading each seller's files, in the arraylist of seller objects each seller already has all
+    their storefronts loaded
     - With all these storefronts loaded, the Marketplace iterates through each storefront and each product
     - through this process two arraylists, one of every storefront and one of every product, are created
     - these arraylists are what will be used to create the menu for the user to interact with
@@ -92,7 +95,8 @@ public class Marketplace {
 
     public void buyCart(Buyer buyer) {
         for (int i = 0; i < buyer.getShoppingCart().size(); i++) {
-            buyer.addSale(buyItem(buyer, buyer.getShoppingCart().get(i).getStoreFrontName(), buyer.getShoppingCart().get(i).getName(), buyer.getCartQuantities().get(i)));
+            buyer.addSale(buyItem(buyer, buyer.getShoppingCart().get(i).getStoreFrontName(),
+                    buyer.getShoppingCart().get(i).getName(), buyer.getCartQuantities().get(i)));
         }
         buyer.setCartQuantities(new ArrayList<>());
         buyer.setShoppingCart(new ArrayList<>());
@@ -123,7 +127,8 @@ public class Marketplace {
 
     /*
     Close Marketplace:
-    Since throughout the process of a buyer interacting with the marketplace, one or more sellers' data has been changed:
+    Since throughout the process of a buyer interacting with the marketplace,
+    one or more sellers' data has been changed:
     - This method iterates through every seller in the marketplace and calls "logOut"
     - Logging the sellers out essentially re-write's their data files to hold the updated information
      */
