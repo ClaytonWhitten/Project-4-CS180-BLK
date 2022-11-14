@@ -147,7 +147,7 @@ public class Tests {
         buyer.logOut();
         seller.logOut();
 
-        // make copies of files for later comparison
+        // make copies of original files for later comparison
         try {
             Files.copy(Paths.get("TheBuyer.txt"), Paths.get("TheBuyerOriginal.txt"), new CopyOption[0]);
             Files.copy(Paths.get("TheSeller.txt"), Paths.get("TheSellerOriginal.txt"), new CopyOption[0]);
@@ -161,12 +161,15 @@ public class Tests {
             e.printStackTrace();
         }
 
+        // contents of original files are loaded again
         Buyer buyerNewLogin = new Buyer(user1, name);
         Seller sellerNewLogin = new Seller(user2);
 
+        // logins successful
         assertTrue(buyerNewLogin.login());
         assertTrue(sellerNewLogin.login());
 
+        // produce file once again
         buyerNewLogin.logOut();
         sellerNewLogin.logOut();
 
