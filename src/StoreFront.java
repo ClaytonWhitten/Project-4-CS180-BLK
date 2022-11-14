@@ -145,9 +145,11 @@ public class StoreFront {
         for (int i = 0; i < products.size(); i++) {
             storefront += "-" + products.get(i) + "\n";
         }
-        storefront += ">" + sales.get(0);
-        for (int i = 1; i < sales.size(); i++) {
-            storefront += ";" + sales.get(i);
+        if (sales.size() > 0) {
+            storefront += ">" + sales.get(0);
+            for (int i = 1; i < sales.size(); i++) {
+                storefront += ";" + sales.get(i);
+            }
         }
         return storefront;
     }
