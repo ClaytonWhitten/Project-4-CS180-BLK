@@ -180,7 +180,6 @@ public class Main {
 
                                                 int productSelection;
                                                 if (productOptions == 1) { // user wants to choose a product
-                                                    System.out.println(seller.getStoreFronts().get(storeSelection - 1).getProducts());
                                                     System.out.println("Product format:");
                                                     System.out.println("name::storeFrontName::description::availableQuantity::price::amountInCarts");
                                                     do {
