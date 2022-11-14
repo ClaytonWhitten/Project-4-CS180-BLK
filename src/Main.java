@@ -349,7 +349,7 @@ public class Main {
 
                                         seller.addStore(storeName, username, products);
                                         seller.logOut();
-                                        storeFrontOptions = 4;
+                                        storeFrontOptions = 5;
 
                                     } else if (sellerOptions == 3) { // user logs out
                                         choice = 3;
