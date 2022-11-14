@@ -521,12 +521,12 @@ public class Main {
                                                                             System.out.println("Select quantity: ");
                                                                             try {
                                                                                 int quantityDesired = Integer.parseInt(scan.nextLine());
-                                                                                if (quantityDesired > currentList.get(selectedProduct).getAvailableQuantity()) {
+                                                                                if (quantityDesired > currentList.get(selectedProduct - 1).getAvailableQuantity()) {
                                                                                     System.out.println("Not enough available items");
                                                                                     check3 = false;
                                                                                 } else if (quantityDesired > 0) {
                                                                                     check3 = true;
-                                                                                    marketplace.addToCart(buyer, currentList.get(selectedProduct), quantityDesired);
+                                                                                    marketplace.addToCart(buyer, currentList.get(selectedProduct - 1), quantityDesired);
                                                                                 } else {
                                                                                     check3 = false;
                                                                                     System.out.println("Try again");
