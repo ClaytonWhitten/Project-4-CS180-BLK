@@ -1,6 +1,13 @@
 import java.io.*;
 import java.util.*;
 
+/**
+ * A class for creating Stores and managing their contents
+ *
+ * @version Nov 14, 2022
+ * @author Clayton Whitten, Paraj Goyal, Aadit Bennur, Hamilton Wang, Colin Heniff
+ */
+
 public class StoreFront {
 
     private String storeFrontName;

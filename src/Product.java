@@ -1,5 +1,12 @@
 import java.util.Comparator;
 
+/**
+ * A class for creating and managing products
+ *
+ * @version Nov 14, 2022
+ * @author Clayton Whitten, Paraj Goyal, Aadit Bennur, Hamilton Wang, Colin Heniff
+ */
+
 public class Product {
 
     private String name;

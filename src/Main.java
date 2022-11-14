@@ -1,6 +1,13 @@
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * A program that runs the marketplace
+ *
+ * @version Nov 14, 2022
+ * @author Clayton Whitten, Paraj Goyal, Aadit Bennur, Hamilton Wang, Colin Heniff
+ */
+
 public class Main {
 
     public static void main(String[] args) {
@@ -174,7 +181,7 @@ public class Main {
 
                                             do {
                                                 System.out.println("Current store: " + seller.getStoreFronts().get(storeSelection - 1).getStoreFrontName());
-                                                System.out.printf("1. Import list of products\n2. Export list of products\n3. View history\n4. View statistics\n5. View products by shopping carts\n6. Edit products\n7. Back");
+                                                System.out.printf("1. Import list of products\n2. Export list of products\n3. View history\n4. View statistics\n5. View products by shopping carts\n6. Edit products\n7. Back\n");
                                                 try {
                                                     storeFrontOptions = Integer.parseInt(scan.nextLine());
                                                 } catch (Exception e) {

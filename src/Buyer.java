@@ -1,6 +1,13 @@
 import java.io.*;
 import java.util.*;
 
+/**
+ * A class for creating and managing buyers
+ *
+ * @version Nov 14, 2022
+ * @author Clayton Whitten, Paraj Goyal, Aadit Bennur, Hamilton Wang, Colin Heniff
+ */
+
 public class Buyer extends User {
 
     private String name;

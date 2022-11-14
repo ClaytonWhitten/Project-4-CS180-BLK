@@ -1,5 +1,12 @@
 import java.io.*;
 
+/**
+ * The parent class for the buyers and sellers
+ *
+ * @version Nov 14, 2022
+ * @author Clayton Whitten, Paraj Goyal, Aadit Bennur, Hamilton Wang, Colin Heniff
+ */
+
 public class User {
 
     private String username;

@@ -1,3 +1,10 @@
+/**
+ * A class for creating and managing sales
+ *
+ * @version Nov 14, 2022
+ * @author Clayton Whitten, Paraj Goyal, Aadit Bennur, Hamilton Wang, Colin Heniff
+ */
+
 public class Sale {
 
     private String customerInfo;

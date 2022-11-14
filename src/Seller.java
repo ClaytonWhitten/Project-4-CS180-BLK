@@ -1,6 +1,13 @@
 import java.io.*;
 import java.util.*;
 
+/**
+ * A class for creating and managing sellers
+ *
+ * @version Nov 14, 2022
+ * @author Clayton Whitten, Paraj Goyal, Aadit Bennur, Hamilton Wang, Colin Heniff
+ */
+
 public class Seller extends User {
 
     private ArrayList<StoreFront> storeFronts;
