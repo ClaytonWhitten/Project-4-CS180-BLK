@@ -119,4 +119,8 @@ public class Product {
         return "".format("%s::%s::%s::%d::%.2f::%d", name, storeFrontName, 
             description, availableQuantity, price, numAddedToCarts);
     }
+
+    public void decrementCartNum(int quantity) {
+        numAddedToCarts -= quantity;
+    }
 }

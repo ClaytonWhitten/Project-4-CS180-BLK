@@ -110,7 +110,8 @@ public class Seller extends User {
                     }
                     if (lines.get(j).equalsIgnoreCase("*****")) {
                         storeFronts.add(new StoreFront(tempStorefrontName, super.getUsername(),
-                                (ArrayList<Product>) tempProductsList.clone(), (ArrayList<Sale>) tempSalesList.clone()));
+                                (ArrayList<Product>) tempProductsList.clone(),
+                                (ArrayList<Sale>) tempSalesList.clone()));
                         tempProductsList.clear();
                         tempSalesList.clear();
                         i = j;
