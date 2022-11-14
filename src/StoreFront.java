@@ -302,7 +302,9 @@ public class StoreFront {
 
     public void printSales() {
         for (int i = 0; i < sales.size(); i++) {
-            System.out.println((i+1) + ". " + sales.get(i));
+            if (sales.get(i).getQuantity() != 0) {
+                System.out.println((i + 1) + ") " + sales.get(i));
+            }
         }
     }
 

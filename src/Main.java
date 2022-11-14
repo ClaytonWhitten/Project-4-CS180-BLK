@@ -239,6 +239,7 @@ public class Main {
                                                     System.out.println("Sales format:");
                                                     System.out.println("customerInfo,productName,quantity,revenue");
                                                     seller.getStoreFronts().get(storeSelection - 1).printSales();
+                                                    System.out.println("-----------------------");
                                                     System.out.printf("1. View history again\n2. Back\n");
                                                     viewHistOrBack = scan.nextInt();
                                                     scan.nextLine();
@@ -311,7 +312,7 @@ public class Main {
                                         break;
                                     }
 
-                                } while (storeFrontOptions == 4);
+                                } while (storeFrontOptions == 5);
 
                             }
 
@@ -837,7 +838,7 @@ public class Main {
 
                         if (user.signUp()) {
                             System.out.println("Please restart the program to register your account");
-                            choice = 1;
+                            choice = 3;
                             break;
                         } else {
 
