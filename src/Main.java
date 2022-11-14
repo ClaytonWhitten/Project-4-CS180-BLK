@@ -826,6 +826,7 @@ public class Main {
                                 }
                             } while (buyerChoice == true);
                             buyer.logOut();
+                            marketplace.closeMarketplace();
                         }
 
                     }
