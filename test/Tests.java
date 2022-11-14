@@ -58,6 +58,11 @@ public class Tests {
 
     @Test(timeout = 1000)
     public void userSetup() {
+        // cleanup files
+        (new File("User1.txt")).delete();
+        (new File("User2.txt")).delete();
+        (new File("sellers.txt")).delete();
+
         String username1 = "User1";
         String pass1 = "Pass1";
         String username2 = "User2";
@@ -87,17 +92,15 @@ public class Tests {
 
         assertTrue(seller.login());
 
-        // cleanup files
-        File file1 = new File("User1.txt");
-        file1.delete();
-        File file2 = new File("User2.txt");
-        file2.delete();
-        File file3 = new File("sellers.txt");
-        file3.delete();
     }
 
     @Test(timeout = 1000)
     public void userPersistence() {
+        (new File("TheBuyer.txt")).delete();
+        (new File("TheBuyerOriginal.txt")).delete();
+        (new File("TheSeller.txt")).delete();
+        (new File("TheSellerOriginal.txt")).delete();
+        (new File("sellers.txt")).delete();
         String username1 = "TheBuyer";
         String pass1 = "Pass1";
         String username2 = "TheSeller";
@@ -152,13 +155,7 @@ public class Tests {
             Files.copy(Paths.get("TheBuyer.txt"), Paths.get("TheBuyerOriginal.txt"), new CopyOption[0]);
             Files.copy(Paths.get("TheSeller.txt"), Paths.get("TheSellerOriginal.txt"), new CopyOption[0]);
         } catch (IOException e) {
-            // cleanup files
-            (new File("TheBuyer.txt")).delete();
-            (new File("TheBuyerOriginal.txt")).delete();
-            (new File("TheSeller.txt")).delete();
-            (new File("TheSellerOriginal.txt")).delete();
-            (new File("sellers.txt")).delete();
-            e.printStackTrace();
+           e.printStackTrace();
         }
 
         // contents of original files are loaded again
@@ -179,20 +176,7 @@ public class Tests {
             assertEquals(-1L, Files.mismatch(Paths.get("TheBuyer.txt"), Paths.get("TheBuyerOriginal.txt")));
             assertEquals(-1L, Files.mismatch(Paths.get("TheSeller.txt"), Paths.get("TheSellerOriginal.txt")));
         } catch (IOException e) {
-            // cleanup files
-            (new File("TheBuyer.txt")).delete();
-            (new File("TheBuyerOriginal.txt")).delete();
-            (new File("TheSeller.txt")).delete();
-            (new File("TheSellerOriginal.txt")).delete();
-            (new File("sellers.txt")).delete();
             e.printStackTrace();
         }
-
-        // cleanup files
-        (new File("TheBuyer.txt")).delete();
-        (new File("TheBuyerOriginal.txt")).delete();
-        (new File("TheSeller.txt")).delete();
-        (new File("TheSellerOriginal.txt")).delete();
-        (new File("sellers.txt")).delete();
     }
 }
