@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.*;
 
 /**
@@ -1120,8 +1119,13 @@ public class Main {
                     do {
 
                         System.out.printf("Signup Menu\n********\n");
-                        System.out.println("Enter a username:");
-                        newUsername = scan.nextLine();
+                        do {
+                            System.out.println("Enter a username:");
+                            newUsername = scan.nextLine();
+                            if (newUsername.equalsIgnoreCase("sellers")) {
+                                System.out.println("Sorry. This cannot be your username");
+                            }
+                        } while (newUsername.equalsIgnoreCase("sellers"));
                         System.out.println("Enter a strong password:");
                         newPassword = scan.nextLine();
 
