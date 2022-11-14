@@ -141,10 +141,10 @@ public class Main {
 
                                             do {
                                                 System.out.println("Current store: " + seller.getStoreFronts().get(storeSelection - 1).getStoreFrontName());
-                                                System.out.printf("1. Import list of products\n2. Edit products\n3. View History\n4. Back\n");
+                                                System.out.printf("1. Import list of products\n2. Edit products\n3. View history\n4. Export list of products\n5. Back\n");
                                                 storeFrontOptions = scan.nextInt();
                                                 scan.nextLine();
-                                            } while (storeFrontOptions != 1 && storeFrontOptions != 2 && storeFrontOptions != 3 && storeFrontOptions != 4);
+                                            } while (storeFrontOptions != 1 && storeFrontOptions != 2 && storeFrontOptions != 3 && storeFrontOptions != 4 && storeFrontOptions != 5);
 
                                             if (storeFrontOptions == 1) { // user wants to import a list of products
                                                 int fileOrBack;
@@ -156,6 +156,7 @@ public class Main {
                                                 } while (fileOrBack != 1 && fileOrBack != 2);
 
                                                 if (fileOrBack == 1) {
+                                                    System.out.println("Enter your file name:");
                                                     String fileName = scan.nextLine();
                                                     for (int i = 0; i < seller.getStoreFronts().size(); i++) {
                                                         try {
@@ -248,9 +249,28 @@ public class Main {
                                                     continue;
                                                 }
 
-                                            } else if (storeFrontOptions == 4) { // user wants to go back
+                                            } else if (storeFrontOptions == 4) { // user wants to export products
+
+                                                int fileOrBack;
+                                                System.out.println("File format will be as follows:\nname::storeFrontName::description::availableQuantity::price");
+                                                do {
+                                                    System.out.printf("1. Export products from %s\n2. Back\n", seller.getStoreFronts().get(storeSelection - 1).getStoreFrontName());
+                                                    fileOrBack = scan.nextInt();
+                                                    scan.nextLine();
+                                                } while (fileOrBack != 1 && fileOrBack != 2);
+
+                                                if (fileOrBack == 1) {
+                                                    System.out.println("Enter a filename");
+                                                    String fileName = scan.nextLine();
+                                                    seller.getStoreFronts().get(storeSelection - 1).exportProductsList(fileName);
+                                                } else if (fileOrBack == 2) {
+                                                    back = true;
+                                                }
+
+                                            } else if (storeFrontOptions == 5) { // user wants to go back
                                                 break;
                                             }
+
                                         } while (back);
 
                                     } else if (sellerOptions == 2) { // user creates a store
@@ -816,6 +836,7 @@ public class Main {
                         user = new User(newUsername, newPassword, agentType);
 
                         if (user.signUp()) {
+                            System.out.println("Please restart the program to register your account");
                             choice = 1;
                             break;
                         } else {
