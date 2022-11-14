@@ -117,6 +117,15 @@ public class StoreFront {
         return list;
     }
 
+    public void printDataByCustomer() {
+        ArrayList<Map<String, Integer>> list = getDataByCustomer();
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println("Customer: " + list.get(i).keySet());
+            System.out.println("Number of Items Purchased: " + list.get(i).get(list.get(i).keySet()));
+            System.out.println();
+        }
+    }
+
     /*
     Get Data By Product:
     The handout says the following - "Sellers can view a dashboard that lists statistics for each of their stores.
@@ -145,6 +154,15 @@ public class StoreFront {
             }
         }
         return list;
+    }
+
+    public void printDataByProduct() {
+        ArrayList<Map<String, Integer>> list = getDataByProduct();
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println("Product: " + list.get(i).keySet());
+            System.out.println("Quantity Sold: " + list.get(i).get(list.get(i).keySet()));
+            System.out.println();
+        }
     }
 
     @Override
@@ -242,17 +260,14 @@ public class StoreFront {
      */
     public void printStoreFront() {
         System.out.println(storeFrontName);
-        System.out.println("|---------------------|");
+        System.out.println("-----------------------");
 
         for (int i = 0; i < products.size(); i++) {
             Product currentProduct = (products.get(i));
 
-            System.out.println((i + 1) + ". " + currentProduct.getName());
-            System.out.println("- Price: " + currentProduct.getPrice());
-            System.out.println("");
+            System.out.print((i + 1) + ". " + currentProduct.getName());
+            System.out.println(", Price: " + currentProduct.getPrice());
         }
-
-        System.out.print("|---------------------|");
 
     }
 
