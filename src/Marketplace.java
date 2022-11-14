@@ -45,6 +45,8 @@ public class Marketplace {
                 }
             }
         }
+        allStores = new ArrayList<>();
+        allProducts = new ArrayList<>();
         for (int i = 0; i < lines.size(); i++) {
             allSellers.add(new Seller(lines.get(i), "seller"));
         }

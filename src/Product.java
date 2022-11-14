@@ -95,7 +95,7 @@ public class Product {
     // desc - true for descending order, false for ascending order
     public static Comparator<Product> availabilityCompare(boolean desc) {
         return (Product a, Product b) ->
-            (desc ? -1 : 1) * Integer.compare(a.getAvailableQuantity(), a.getAvailableQuantity());
+            (desc ? -1 : 1) * Integer.compare(a.getAvailableQuantity(), b.getAvailableQuantity());
     }
 
     public void printProductDetails() {
