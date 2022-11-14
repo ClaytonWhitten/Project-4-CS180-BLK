@@ -298,8 +298,112 @@ public class Main {
                             }
 
                         } else if (user.getType().equals("buyer")) { // marketplace for buyers
+                            Buyer buyer = new Buyer(user);
+                            Marketplace marketplace = new Marketplace();
+                            int selectedProduct;
+                            boolean productChoice = false;
+                            boolean buyerChoice = false;
+                            do {
+                                System.out.println("Which storefront would you like to access?");
+                                System.out.println("1. All products");
+                                marketplace.printListStorefronts();
+                                System.out.println((marketplace.getAllStores().size() + 2) + ". Search");
+                                System.out.println((marketplace.getAllStores().size() + 3) + ". View Cart");
+                                System.out.println((marketplace.getAllStores().size() + 4) + ". Logout");
+                                try {
+                                    int selectedStore = Integer.parseInt(scan.nextLine());
+                                    if (selectedStore == 1) { // user selected all products
+                                        boolean sorted = false;
+                                        do {
+                                            ArrayList<Product> currentList = new ArrayList<>();
+                                            if (!sorted) {
+                                                currentList = marketplace.getAllProducts();
+                                            }
+                                            marketplace.printProductList(currentList);
+                                            System.out.println((marketplace.getAllProducts().size() + 1) + ". Sort by Price");
+                                            System.out.println((marketplace.getAllProducts().size() + 2) + ". Sort by Quantity");
+                                            System.out.println((marketplace.getAllProducts().size() + 3) + ". Back");
+                                            try {
+                                                selectedProduct = Integer.parseInt(scan.nextLine());
+                                                boolean worked = true;
+                                                String ascOrDes;
+                                                if (selectedProduct <= marketplace.getAllProducts().size() && selectedProduct >= 1) { // user picked a product
 
+                                                } else if (selectedProduct == marketplace.getAllProducts().size() + 1) { // sorting by price
+                                                    productChoice = true;
+                                                    sorted = true;
+                                                    do {
+                                                        System.out.println("Would you like to sort ascending or descending");
+                                                        ascOrDes = scan.nextLine();
+                                                        if (ascOrDes.equals("ascending")) {
+                                                            currentList = marketplace.sort("price", false, marketplace.getAllProducts());
+                                                        } else if (ascOrDes.equals("descending")) {
+                                                            currentList = marketplace.sort("price", true, marketplace.getAllProducts());
+                                                        } else {
+                                                            worked = false;
+                                                        }
+                                                    } while (worked = false);
+                                                } else if (selectedProduct == marketplace.getAllProducts().size() + 2) { // sorting by quantity
+                                                    sorted = true;
+                                                    productChoice = true;
+                                                    do {
+                                                        System.out.println("Would you like to sort ascending or descending");
+                                                        ascOrDes = scan.nextLine();
+                                                        if (ascOrDes.equals("ascending")) {
+                                                            currentList = marketplace.sort("quantity", false, marketplace.getAllProducts());
+                                                        } else if (ascOrDes.equals("descending")) {
+                                                            currentList = marketplace.sort("quantity", true, marketplace.getAllProducts());
+                                                        } else {
+                                                            worked = false;
+                                                        }
+                                                    } while (worked = false);
+                                                } else if (selectedProduct == marketplace.getAllProducts().size() + 3) { // going back
+                                                    buyerChoice = true;
+                                                    productChoice = false;
+                                                } else {
+                                                    System.out.println("Try again");
+                                                    productChoice = true;
+                                                }
+                                            } catch (Exception e) {
+                                                System.out.println("Try again");
+                                                productChoice = true;
+                                            }
+                                        } while (productChoice == true);
+                                    } else if (selectedStore <= marketplace.getAllStores().size() + 1 && selectedStore >= 2) { // user selected a storefront
+                                        for (int i = 0; i < marketplace.getAllStores().size(); i++) {
+                                            boolean storeFrontSelection = false;
+                                            do {
+                                                if (selectedStore == i + 2) {
+                                                    marketplace.getAllStores().get(i).printStoreFront();
+                                                    try {
+                                                        selectedProduct = Integer.parseInt(scan.nextLine());
+                                                        if (selectedProduct > marketplace.getAllStores().get(i).getProducts().size() || selectedProduct < 1) {
+                                                            System.out.println("Try again");
+                                                            storeFrontSelection = true;
+                                                        }
+                                                    } catch (Exception e) {
+                                                        System.out.println("Try again");
+                                                        storeFrontSelection = true;
+                                                    }
+                                                }
+                                            } while (storeFrontSelection == true);
+                                        }
+                                    } else if (selectedStore == marketplace.getAllStores().size() + 2) { // user selected to search
+                                        System.out.println("Enter search: ");
+                                        String buyerSearch = scan.nextLine();
+                                    } else if (selectedStore == marketplace.getAllStores().size() + 4) { // user selected to logout
+                                        choice = 3;
+                                        continue;
+                                    } else if (selectedStore == marketplace.getAllStores().size() + 3) { // user selected to view cart
 
+                                    } else {
+                                        System.out.println("Try again");
+                                        buyerChoice = true;
+                                    }
+                                } catch (Exception e) {
+                                    buyerChoice = true;
+                                }
+                            } while (buyerChoice == true);
 
                         }
 
