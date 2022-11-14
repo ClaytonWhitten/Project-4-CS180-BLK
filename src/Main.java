@@ -444,7 +444,7 @@ public class Main {
 
                                         for (int i = 0; i < productAmount; i++) {
 
-                                            System.out.printf("What is the name of product %d:\n", (i+1));
+                                            System.out.printf("What is the name of product %d:\n", (i + 1));
                                             String productName = scan.nextLine();
                                             System.out.printf("Give a short description of %s\n", productName);
                                             String productDescription = scan.nextLine();
@@ -564,7 +564,7 @@ public class Main {
                                                         } catch (Exception e) {
                                                             check = false;
                                                         }
-                                                    } while (check = false);
+                                                    } while (!check);
                                                 } else if (selectedProduct ==
                                                         marketplace.getAllProducts().size() + 1) { // sorting by price
                                                     productChoice = true;
@@ -589,7 +589,7 @@ public class Main {
                                                         } catch (Exception e) {
                                                             worked = false;
                                                         }
-                                                    } while (worked = false);
+                                                    } while (!worked);
                                                 } else if (selectedProduct ==
                                                         marketplace.getAllProducts().size()
                                                                 + 2) { // sorting by quantity
@@ -615,7 +615,7 @@ public class Main {
                                                         } catch (Exception e) {
                                                             worked = false;
                                                         }
-                                                    } while (worked = false);
+                                                    } while (!worked);
                                                 } else if (selectedProduct ==
                                                         marketplace.getAllProducts().size() + 3) { // going back
                                                     productChoice = false;
@@ -706,7 +706,7 @@ public class Main {
                                                                 } catch (Exception e) {
                                                                     check1 = false;
                                                                 }
-                                                            } while (check1 = false);
+                                                            } while (!check1);
                                                         } else if (selectedProduct
                                                                 == marketplace.getAllStores().get(
                                                                         i).getProducts().size()
@@ -737,7 +737,7 @@ public class Main {
                                                                 } catch (Exception e) {
                                                                     worked1 = false;
                                                                 }
-                                                            } while (worked1 = false);
+                                                            } while (!worked1);
                                                         } else if (selectedProduct
                                                                 == marketplace.getAllStores().get(
                                                                         i).getProducts().size()
@@ -770,7 +770,7 @@ public class Main {
                                                                 } catch (Exception e) {
                                                                     worked1 = false;
                                                                 }
-                                                            } while (worked1 = false);
+                                                            } while (!worked1);
                                                         } else if (selectedProduct
                                                                 == marketplace.getAllStores().get(
                                                                         i).getProducts().size() + 3) { // going back
@@ -875,7 +875,7 @@ public class Main {
                                                                 } catch (Exception e) {
                                                                     check4 = false;
                                                                 }
-                                                            } while (check4 = false);
+                                                            } while (!check4);
                                                         } else if (searchInt
                                                                 == currentList.size() + 1) { // sort by price
                                                             search1 = true;
