@@ -193,7 +193,9 @@ public class Buyer extends User {
 
     public void printCart() {
         for (int i = 0; i < shoppingCart.size(); i++) {
-            System.out.println(i + ". " + shoppingCart.get(i).getName() + ", Amt: " + cartQuantities.get(i));
+            System.out.println((i + 1) + ". " + shoppingCart.get(i).getName() + ", Amount: " + cartQuantities.get(i));
         }
     }
+
+
 }

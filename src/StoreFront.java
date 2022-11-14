@@ -305,4 +305,12 @@ public class StoreFront {
             System.out.println((i+1) + ". " + sales.get(i));
         }
     }
+
+    public int totalSales() {
+        int sum = 0;
+        for (int i = 0; i < sales.size(); i++) {
+            sum += sales.get(i).getQuantity();
+        }
+        return sum;
+    }
 }

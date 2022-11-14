@@ -87,6 +87,8 @@ public class Marketplace {
         for (int i = 0; i < buyer.getShoppingCart().size(); i++) {
             buyer.addSale(buyItem(buyer, buyer.getShoppingCart().get(i).getStoreFrontName(), buyer.getShoppingCart().get(i).getName(), buyer.getCartQuantities().get(i)));
         }
+        buyer.setCartQuantities(new ArrayList<>());
+        buyer.setShoppingCart(new ArrayList<>());
     }
 
     public boolean addToCart(Buyer buyer, Product product, int quantity) {
@@ -202,10 +204,38 @@ public class Marketplace {
         }
     }
 
-    public void printListStorefronts () { //returns a numbered list of storefronts
+    public void printListStorefronts() { //returns a numbered list of storefronts
         for (int i = 0; i < allStores.size(); i++) {
             System.out.print((i + 2) + ". ");
             System.out.println(allStores.get(i).getStoreFrontName());
+        }
+    }
+
+    public void printStoreStatistics(ArrayList<StoreFront> storeFronts) {
+        ArrayList<StoreFront> list = (ArrayList<StoreFront>) storeFronts.clone();
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i).getStoreFrontName() + ", Products Sold: " + list.get(i).totalSales());
+        }
+    }
+
+    public ArrayList<StoreFront> getStoresWithBuyerPurchase(Buyer buyer) {
+        ArrayList<StoreFront> list = new ArrayList<>();
+        for (int i = 0; i < allStores.size(); i++) {
+            for (int j = 0; j < allStores.get(i).getSales().size(); j++) {
+                if (allStores.get(i).getSales().get(j).getCustomerInfo().equalsIgnoreCase(buyer.getUsername())) {
+                    list.add(allStores.get(i));
+                    break;
+                }
+            }
+        }
+        return list;
+    }
+
+    public void printStoreStatsBuyer(Buyer buyer) {
+        ArrayList<StoreFront> list = getStoresWithBuyerPurchase(buyer);
+
+        for (StoreFront s: list) {
+            System.out.println(s.getStoreFrontName());
         }
     }
 }
