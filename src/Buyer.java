@@ -61,7 +61,7 @@ public class Buyer extends User {
         //tempsalesfields
         String[] tsf;
 
-        for (int i = 0; i < lines.size(); i++) {
+        for (int i = 1; i < lines.size(); i++) {
             if (lines.get(i).charAt(0) == '-') {
                 tpf = lines.get(i).substring(1).split("::");
                 shoppingCart.add(new Product(tpf[0], tpf[1], tpf[2], Integer.parseInt(tpf[3]), 
@@ -142,8 +142,18 @@ public class Buyer extends User {
     }
 
     public void addToCart(Product product, int quantity) {
-        shoppingCart.add(product);
-        cartQuantities.add(quantity);
+        boolean exists = false;
+        for (int i = 0; i < shoppingCart.size(); i++) {
+            if (shoppingCart.get(i).getName().equalsIgnoreCase(product.getName())
+                    && shoppingCart.get(i).getStoreFrontName().equalsIgnoreCase(product.getStoreFrontName())) {
+                cartQuantities.set(i, cartQuantities.get(i) + quantity);
+                exists = true;
+            }
+        }
+        if (!exists) {
+            shoppingCart.add(product);
+            cartQuantities.add(quantity);
+        }
     }
 
     public String getName() {

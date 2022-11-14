@@ -165,6 +165,18 @@ public class StoreFront {
         }
     }
 
+    public void printProductsData() {
+        for (int i = 0; i < products.size(); i++) {
+            System.out.println("Product: " + products.get(i).getName());
+            System.out.println("Store: " + products.get(i).getStoreFrontName());
+            System.out.println("Description: " + products.get(i).getDescription());
+            System.out.println("Quantity Available: " + products.get(i).getAvailableQuantity());
+            System.out.println("Price: " + String.format("%.2f", products.get(i).getPrice()));
+            System.out.println("Number of items in shopping carts: " + products.get(i).getNumAddedToCarts());
+            System.out.println();
+        }
+    }
+
     @Override
     public String toString() {
         String storefront = "";
@@ -210,12 +222,14 @@ public class StoreFront {
                 tempProductFields = lines.get(i).split("::");
             } catch (Exception e) {
                 System.out.println("Error Adding Product");
+                continue;
             }
             if (tempProductFields[0].equalsIgnoreCase("") ||
                     tempProductFields[1].equalsIgnoreCase("") ||
                     !tempProductFields[1].equalsIgnoreCase(storeFrontName) ||
                     tempProductFields[2].equalsIgnoreCase("")) {
                 System.out.println("Error Adding Product");
+                continue;
             }
             try {
                 products.add(new Product(tempProductFields[0],
@@ -225,6 +239,7 @@ public class StoreFront {
                         Double.parseDouble(tempProductFields[4])));
             } catch (Exception e) {
                 System.out.println("Error Adding Product");
+                continue;
             }
         }
     }
