@@ -181,4 +181,19 @@ public class Buyer extends User {
     public void addSale(Sale sale) {
         purchases.add(sale);
     }
+
+    public boolean removeFromCart(int i) {
+        if (i < shoppingCart.size() && i >= 0) {
+            shoppingCart.remove(i);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void printCart() {
+        for (int i = 0; i < shoppingCart.size(); i++) {
+            System.out.println(i + ". " + shoppingCart.get(i).getName() + ", Amt: " + cartQuantities.get(i));
+        }
+    }
 }
