@@ -102,7 +102,7 @@ public class Buyer extends User {
                 pw.print(">");
                 for (int i = 0; i < purchases.size(); i++) {
                     Sale s = purchases.get(i);
-                    pw.println("".format((i != 0 ? ";" : "") + "%s,%s,%d,%.2f", s.getCustomerInfo(), 
+                    pw.print("".format((i != 0 ? ";" : "") + "%s,%s,%d,%.2f", s.getCustomerInfo(),
                         s.getProductName(), s.getQuantity(), s.getRevenue()));
                 }
             }

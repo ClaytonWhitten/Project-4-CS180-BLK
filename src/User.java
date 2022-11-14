@@ -61,16 +61,16 @@ public class User {
             firstLine = br.readLine();
             return password.equals(firstLine.substring(0, firstLine.indexOf(";")));
         } catch (IOException e) {
-            e.printStackTrace();
+            return false;
         } finally {
             try {
                 type = firstLine.substring(firstLine.indexOf(";") + 1);
                 br.close();
             } catch (Exception e) {
-                e.printStackTrace();
+                return false;
             }
         }
-        return false;
+        //return false;
     }
 
     public String getUsername() {
