@@ -485,9 +485,11 @@ public class Main {
                                                                                     marketplace.addToCart(buyer, currentList.get(selectedProduct), quantityDesired);
                                                                                 } else {
                                                                                     check3 = false;
+                                                                                    System.out.println("Try again");
                                                                                 }
                                                                             } catch (Exception e) {
                                                                                 check3 = false;
+                                                                                System.out.println("Try again");
                                                                             }
                                                                         } while (check3 == false);
                                                                     } else if (buyOrBack1 == 2) { // user wants to go back
