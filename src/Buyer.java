@@ -18,6 +18,13 @@ public class Buyer extends User {
         readBuyerFile(user.getUsername() + ".txt");
     }
 
+    public Buyer(User user) {
+        super(user.getUsername(), user.getPassword(), user.getType());
+        shoppingCart = new ArrayList<>();
+        cartQuantities = new ArrayList<>();
+        purchases = new ArrayList<>();
+        readBuyerFile(user.getUsername() + ".txt");
+    }
     /*
     Read Buyer File:
     This function just sets up the buyer object by updating its arraylist of purchases (Sale) and shopping cart (Product)
@@ -170,5 +177,25 @@ public class Buyer extends User {
     public void setPurchases(ArrayList<Sale> purchases) {
         this.purchases = purchases;
     }
+
+    public void addSale(Sale sale) {
+        purchases.add(sale);
+    }
+
+    public boolean removeFromCart(int i) {
+        if (i < shoppingCart.size() && i >= 0) {
+            shoppingCart.remove(i);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void printCart() {
+        for (int i = 0; i < shoppingCart.size(); i++) {
+            System.out.println((i + 1) + ". " + shoppingCart.get(i).getName() + ", Amount: " + cartQuantities.get(i));
+        }
+    }
+
 
 }

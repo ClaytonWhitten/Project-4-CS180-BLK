@@ -297,8 +297,490 @@ public class Main {
                             }
 
                         } else if (user.getType().equals("buyer")) { // marketplace for buyers
+                            Buyer buyer = new Buyer(user);
+                            Marketplace marketplace = new Marketplace();
+                            int selectedProduct;
+                            boolean productChoice = false;
+                            boolean buyerChoice = true;
+                            int buyOrBack;
+                            do {
+                                System.out.println("Which storefront would you like to access?");
+                                System.out.println("1. All products");
+                                marketplace.printListStorefronts();
+                                System.out.println((marketplace.getAllStores().size() + 2) + ". Search");
+                                System.out.println((marketplace.getAllStores().size() + 3) + ". View Cart");
+                                System.out.println((marketplace.getAllStores().size() + 4) + ". View Statistics");
+                                System.out.println((marketplace.getAllStores().size() + 5) + ". Export Purchase History");
+                                System.out.println((marketplace.getAllStores().size() + 6) + ". Logout");
+                                try {
+                                    int selectedStore = Integer.parseInt(scan.nextLine());
+                                    if (selectedStore == 1) { // user selected all products
+                                        boolean sorted = false;
+                                        ArrayList<Product> currentList = new ArrayList<>();
+                                        do {
+                                            if (!sorted) {
+                                                currentList = marketplace.getAllProducts();
+                                            }
+                                            marketplace.printProductList(currentList);
+                                            System.out.println((currentList.size() + 1) + ". Sort by Price");
+                                            System.out.println((marketplace.getAllProducts().size() + 2) + ". Sort by Quantity");
+                                            System.out.println((marketplace.getAllProducts().size() + 3) + ". Back");
+                                            try {
+                                                selectedProduct = Integer.parseInt(scan.nextLine());
+                                                boolean worked = true;
+                                                int ascOrDes;
+                                                if (selectedProduct <= marketplace.getAllProducts().size() && selectedProduct >= 1) { // user picked a product
+                                                    boolean check = true;
+                                                    do {
+                                                        currentList.get(selectedProduct - 1).printProductDetails();
+                                                        System.out.println("1. Buy");
+                                                        System.out.println("2. Back");
+                                                        try {
+                                                            buyOrBack = Integer.parseInt(scan.nextLine());
+                                                            if (buyOrBack == 1) { // user wants to buy
+                                                                check = true;
+                                                                boolean check2 = true;
+                                                                do {
+                                                                    System.out.println("Select quantity: ");
+                                                                    try {
+                                                                        int quantityDesired = Integer.parseInt(scan.nextLine());
+                                                                        if (quantityDesired > currentList.get(selectedProduct - 1).getAvailableQuantity()) {
+                                                                            System.out.println("Not enough available items");
+                                                                            check2 = false;
+                                                                        } else if (quantityDesired > 0) {
+                                                                            check2 = true;
+                                                                            marketplace.addToCart(buyer, currentList.get(selectedProduct - 1), quantityDesired);
+                                                                        } else {
+                                                                            check2 = false;
+                                                                        }
+                                                                    } catch (Exception e) {
+                                                                        check2 = false;
+                                                                    }
+                                                                } while (check2 == false);
+                                                            } else if (buyOrBack == 2) { // user wants to go back
+                                                                check = true;
+                                                                productChoice = true;
+                                                            } else {
+                                                                check = false;
+                                                            }
+                                                        } catch (Exception e) {
+                                                            check = false;
+                                                        }
+                                                    } while (check = false);
+                                                } else if (selectedProduct == marketplace.getAllProducts().size() + 1) { // sorting by price
+                                                    productChoice = true;
+                                                    sorted = true;
+                                                    do {
+                                                        System.out.println("How would you like to sort?");
+                                                        System.out.println("1. Ascending");
+                                                        System.out.println("2. Descending");
+                                                        try {
+                                                            ascOrDes = Integer.parseInt(scan.nextLine());
+                                                            if (ascOrDes == 1) {
+                                                                worked = true;
+                                                                currentList = marketplace.sort("price", false, marketplace.getAllProducts());
+                                                            } else if (ascOrDes == 2) {
+                                                                worked = true;
+                                                                currentList = marketplace.sort("price", true, marketplace.getAllProducts());
+                                                            } else {
+                                                                worked = false;
+                                                            }
+                                                        } catch (Exception e) {
+                                                            worked = false;
+                                                        }
+                                                    } while (worked = false);
+                                                } else if (selectedProduct == marketplace.getAllProducts().size() + 2) { // sorting by quantity
+                                                    productChoice = true;
+                                                    sorted = true;
+                                                    do {
+                                                        System.out.println("How would you like to sort?");
+                                                        System.out.println("1. Ascending");
+                                                        System.out.println("2. Descending");
+                                                        try {
+                                                            ascOrDes = Integer.parseInt(scan.nextLine());
+                                                            if (ascOrDes == 1) {
+                                                                worked = true;
+                                                                currentList = marketplace.sort("quantity", false, marketplace.getAllProducts());
+                                                            } else if (ascOrDes == 2) {
+                                                                worked = true;
+                                                                currentList = marketplace.sort("quantity", true, marketplace.getAllProducts());
+                                                            } else {
+                                                                worked = false;
+                                                            }
+                                                        } catch (Exception e) {
+                                                            worked = false;
+                                                        }
+                                                    } while (worked = false);
+                                                } else if (selectedProduct == marketplace.getAllProducts().size() + 3) { // going back
+                                                    productChoice = false;
+                                                } else {
+                                                    System.out.println("Try again");
+                                                    productChoice = true;
+                                                }
+                                            } catch (Exception e) {
+                                                System.out.println("Try again");
+                                                productChoice = true;
+                                            }
+                                        } while (productChoice == true);
+                                    } else if (selectedStore <= marketplace.getAllStores().size() + 1 && selectedStore >= 2) { // user selected a storefront
+                                        for (int i = 0; i < marketplace.getAllStores().size(); i++) {
+                                            boolean storeFrontSelection = false;
+                                            boolean sorted1 = false;
+                                            int ascOrDes1;
+                                            boolean worked1 = true;
+                                            ArrayList<Product> currentList = new ArrayList<>();
+                                            do {
+                                                if (selectedStore == i + 2) {
+                                                    if (!sorted1) {
+                                                        currentList = marketplace.getAllStores().get(i).getProducts();
+                                                    }
+                                                    marketplace.getAllStores().get(i).printStoreFrontByList(currentList);
+                                                    System.out.println((marketplace.getAllStores().get(i).getProducts().size() + 1) + ". Sort by Price");
+                                                    System.out.println((marketplace.getAllStores().get(i).getProducts().size() + 2) + ". Sort by Quantity");
+                                                    System.out.println((marketplace.getAllStores().get(i).getProducts().size() + 3) + ". Back");
+                                                    try {
+                                                        selectedProduct = Integer.parseInt(scan.nextLine());
+                                                        if (selectedProduct <= marketplace.getAllStores().get(i).getProducts().size() && selectedProduct >= 1) { // user picked a product
+                                                            storeFrontSelection = true;
+                                                            boolean check1 = true;
+                                                            int buyOrBack1;
+                                                            do {
+                                                                currentList.get(selectedProduct - 1).printProductDetails();
+                                                                System.out.println("1. Buy");
+                                                                System.out.println("2. Back");
+                                                                try {
+                                                                    buyOrBack1 = Integer.parseInt(scan.nextLine());
+                                                                    if (buyOrBack1 == 1) { // user wants to buy
+                                                                        check1 = true;
+                                                                        boolean check3 = true;
+                                                                        do {
+                                                                            System.out.println("Select quantity: ");
+                                                                            try {
+                                                                                int quantityDesired = Integer.parseInt(scan.nextLine());
+                                                                                if (quantityDesired > currentList.get(selectedProduct).getAvailableQuantity()) {
+                                                                                    System.out.println("Not enough available items");
+                                                                                    check3 = false;
+                                                                                } else if (quantityDesired > 0) {
+                                                                                    check3 = true;
+                                                                                    marketplace.addToCart(buyer, currentList.get(selectedProduct), quantityDesired);
+                                                                                } else {
+                                                                                    check3 = false;
+                                                                                }
+                                                                            } catch (Exception e) {
+                                                                                check3 = false;
+                                                                            }
+                                                                        } while (check3 == false);
+                                                                    } else if (buyOrBack1 == 2) { // user wants to go back
+                                                                        check1 = true;
+                                                                        storeFrontSelection = true;
+                                                                    } else {
+                                                                        check1 = false;
+                                                                    }
+                                                                } catch (Exception e) {
+                                                                    check1 = false;
+                                                                }
+                                                            } while (check1 = false);
+                                                        } else if (selectedProduct == marketplace.getAllStores().get(i).getProducts().size() + 1) { // sorting by price
+                                                            storeFrontSelection = true;
+                                                            sorted1 = true;
+                                                            do {
+                                                                System.out.println("How would you like to sort?");
+                                                                System.out.println("1. Ascending");
+                                                                System.out.println("2. Descending");
+                                                                try {
+                                                                    ascOrDes1 = Integer.parseInt(scan.nextLine());
+                                                                    if (ascOrDes1 == 1) {
+                                                                        worked1 = true;
+                                                                        currentList = marketplace.sort("price", false, marketplace.getAllStores().get(i).getProducts());
+                                                                    } else if (ascOrDes1 == 2) {
+                                                                        worked1 = true;
+                                                                        currentList = marketplace.sort("price", true, marketplace.getAllStores().get(i).getProducts());
+                                                                    } else {
+                                                                        worked1 = false;
+                                                                    }
+                                                                } catch (Exception e) {
+                                                                    worked1 = false;
+                                                                }
+                                                            } while (worked1 = false);
+                                                        } else if (selectedProduct == marketplace.getAllStores().get(i).getProducts().size() + 2) { // sorting by quantity
+                                                            storeFrontSelection = true;
+                                                            sorted1 = true;
+                                                            do {
+                                                                System.out.println("How would you like to sort?");
+                                                                System.out.println("1. Ascending");
+                                                                System.out.println("2. Descending");
+                                                                try {
+                                                                    ascOrDes1 = Integer.parseInt(scan.nextLine());
+                                                                    if (ascOrDes1 == 1) {
+                                                                        worked1 = true;
+                                                                        currentList = marketplace.sort("quantity", false, marketplace.getAllStores().get(i).getProducts());
+                                                                    } else if (ascOrDes1 == 2) {
+                                                                        worked1 = true;
+                                                                        currentList = marketplace.sort("quantity", true, marketplace.getAllStores().get(i).getProducts());
+                                                                    } else {
+                                                                        worked1 = false;
+                                                                    }
+                                                                } catch (Exception e) {
+                                                                    worked1 = false;
+                                                                }
+                                                            } while (worked1 = false);
+                                                        } else if (selectedProduct == marketplace.getAllStores().get(i).getProducts().size() + 3) { // going back
+                                                            storeFrontSelection = false;
+                                                        } else {
+                                                            System.out.println("Try again");
+                                                            storeFrontSelection = true;
+                                                        }
+                                                    } catch (Exception e) {
+                                                        System.out.println("Try again");
+                                                        storeFrontSelection = true;
+                                                    }
+                                                }
+                                            } while (storeFrontSelection == true);
+                                        }
+                                    } else if (selectedStore == marketplace.getAllStores().size() + 2) { // user selected to search
+                                        boolean search1 = false;
+                                        int ascOrDes2;
+                                        boolean worked2 = true;
+                                        boolean worked3 = true;
+                                        do {
+                                            System.out.println("Enter search: ");
+                                            String buyerSearch = scan.nextLine();
+                                            ArrayList<Product> currentList = new ArrayList<>();
+                                            currentList = marketplace.search(buyerSearch);
+                                            do {
+                                                marketplace.printProductList(currentList);
+                                                System.out.println((currentList.size() + 1) + ". Sort by Price");
+                                                System.out.println((currentList.size() + 2) + ". Sort by Quantity");
+                                                System.out.println((currentList.size() + 3) + ". Back");
+                                                try {
+                                                    int searchInt = Integer.parseInt(scan.nextLine());
+                                                    if (searchInt >= 1 && searchInt <= currentList.size()) { // user selected a product
+                                                        worked2 = true;
+                                                        boolean check4 = true;
+                                                        int buyOrBack1;
+                                                        do {
+                                                            currentList.get(searchInt - 1).printProductDetails();
+                                                            System.out.println("1. Buy");
+                                                            System.out.println("2. Back");
+                                                            try {
+                                                                buyOrBack1 = Integer.parseInt(scan.nextLine());
+                                                                if (buyOrBack1 == 1) { // user wants to buy
+                                                                    check4 = true;
+                                                                    boolean check3 = true;
+                                                                    do {
+                                                                        System.out.println("Select quantity: ");
+                                                                        try {
+                                                                            int quantityDesired = Integer.parseInt(scan.nextLine());
+                                                                            if (quantityDesired > currentList.get(searchInt - 1).getAvailableQuantity()) {
+                                                                                System.out.println("Not enough available items");
+                                                                                check3 = false;
+                                                                            } else if (quantityDesired > 0) {
+                                                                                check3 = true;
+                                                                                marketplace.addToCart(buyer, currentList.get(searchInt - 1), quantityDesired);
+                                                                            } else {
+                                                                                check3 = false;
+                                                                            }
+                                                                        } catch (Exception e) {
+                                                                            check3 = false;
+                                                                        }
+                                                                    } while (check3 == false);
+                                                                    search1 = false;
+                                                                } else if (buyOrBack1 == 2) { // user wants to go back
+                                                                    check4 = true;
+                                                                    search1 = true;
+                                                                } else {
+                                                                    check4 = false;
+                                                                }
+                                                            } catch (Exception e) {
+                                                                check4 = false;
+                                                            }
+                                                        } while (check4 = false);
+                                                    } else if (searchInt == currentList.size() + 1) { // sort by price
+                                                        search1 = true;
+                                                        do {
+                                                            System.out.println("How would you like to sort?");
+                                                            System.out.println("1. Ascending");
+                                                            System.out.println("2. Descending");
+                                                            try {
+                                                                ascOrDes2 = Integer.parseInt(scan.nextLine());
+                                                                if (ascOrDes2 == 1) {
+                                                                    worked3 = true;
+                                                                    currentList = marketplace.sort("price", false, currentList);
+                                                                } else if (ascOrDes2 == 2) {
+                                                                    worked3 = true;
+                                                                    currentList = marketplace.sort("price", true, currentList);
+                                                                } else {
+                                                                    worked3 = false;
+                                                                }
+                                                            } catch (Exception e) {
+                                                                worked3 = false;
+                                                            }
+                                                        } while (worked3 == false);
+                                                        worked2 = false;
+                                                    } else if (searchInt == currentList.size() + 2) { // sort by quantity
+                                                        search1 = true;
+                                                        do {
+                                                            System.out.println("How would you like to sort?");
+                                                            System.out.println("1. Ascending");
+                                                            System.out.println("2. Descending");
+                                                            try {
+                                                                ascOrDes2 = Integer.parseInt(scan.nextLine());
+                                                                if (ascOrDes2 == 1) {
+                                                                    worked3 = true;
+                                                                    currentList = marketplace.sort("quantity", false, currentList);
+                                                                } else if (ascOrDes2 == 2) {
+                                                                    worked3 = true;
+                                                                    currentList = marketplace.sort("quantity", true, currentList);
+                                                                } else {
+                                                                    worked3 = false;
+                                                                }
+                                                            } catch (Exception e) {
+                                                                worked3 = false;
+                                                            }
+                                                        } while (worked3 == false);
+                                                        worked2 = false;
+                                                    } else if (searchInt == currentList.size() + 3) { // going back
+                                                        worked2 = true;
+                                                        search1 = false;
 
+                                                    } else {
+                                                        System.out.println("Try again");
+                                                        search1 = true;
+                                                        worked2 = false;
+                                                    }
+                                                } catch (Exception e) {
+                                                    System.out.println("Try again");
+                                                    search1 = true;
+                                                    worked2 = false;
+                                                }
+                                            } while (worked2 == false);
+                                        } while (search1 == true);
+                                    } else if (selectedStore == marketplace.getAllStores().size() + 6) { // user selected to log out
+                                        choice = 3;
+                                        buyerChoice = false;
+                                        continue;
+                                    } else if (selectedStore == marketplace.getAllStores().size() + 3) { // user selected to view cart
+                                        boolean viewCart = true;
+                                        do {
+                                            buyer.printCart();
+                                            System.out.println("-----------------------");
+                                            System.out.println("1. Checkout");
+                                            System.out.println("2. Remove product");
+                                            System.out.println("3. Back");
+                                            boolean productSelection = false;
+                                            try {
+                                                int cartSelection = Integer.parseInt(scan.nextLine());
+                                                if (cartSelection == 1) { // checking out
+                                                    viewCart = false;
+                                                    marketplace.buyCart(buyer);
+                                                } else if (cartSelection == 2) { // removing product
+                                                    do {
+                                                        System.out.println("Which product: ");
+                                                        buyer.printCart();
+                                                        try {
+                                                            int cartProduct = Integer.parseInt(scan.nextLine());
+                                                            if (cartProduct >= 1 && cartProduct <= buyer.getShoppingCart().size()) {
+                                                                for (int i = 0; i < buyer.getShoppingCart().size(); i++) {
+                                                                    if (i == cartProduct - 1) {
+                                                                        buyer.removeFromCart(i);
+                                                                    }
+                                                                }
+                                                                productSelection = false;
+                                                            } else {
+                                                                System.out.println("Try again");
+                                                                productSelection = true;
+                                                            }
+                                                        } catch (Exception e) {
+                                                            System.out.println("Try again");
+                                                            productSelection = true;
+                                                        }
+                                                    } while (productSelection == true);
+                                                    viewCart = true;
+                                                } else if (cartSelection == 3) { // going back
+                                                    viewCart = false;
+                                                } else {
+                                                    System.out.println("Try again");
+                                                    viewCart = true;
+                                                }
+                                            } catch (Exception e) {
+                                                System.out.println("Try again");
+                                                viewCart = true;
+                                            }
+                                        } while (viewCart == true);
 
+                                    } else if (selectedStore == marketplace.getAllStores().size() + 4) { // user selected to view statistics
+                                        boolean viewStats = false;
+                                        do {
+                                            System.out.println("Which database would you like to view?");
+                                            System.out.println("1. All stores");
+                                            System.out.println("2. Your purchases");
+                                            System.out.println("3. Back");
+                                            try {
+                                                int database = Integer.parseInt(scan.nextLine());
+                                                if (database == 1) {
+                                                    ArrayList<StoreFront> currentList = new ArrayList<>();
+                                                    currentList = marketplace.getAllStores();
+                                                    boolean sortDatabase = true;
+                                                    do {
+                                                        marketplace.printStoreStatistics(currentList);
+                                                        System.out.println("How would you like to sort the database");
+                                                        System.out.println("1. Ascending");
+                                                        System.out.println("2. Descending");
+                                                        System.out.println("3. Back");
+                                                        try {
+                                                            int sorter = Integer.parseInt(scan.nextLine());
+                                                            if (sorter == 1) {
+
+                                                                sortDatabase = true;
+                                                            } else if (sorter == 2) {
+
+                                                                sortDatabase = true;
+                                                            } else if (sorter == 3) {
+                                                                sortDatabase = false;
+                                                            } else {
+                                                                System.out.println("Try again");
+                                                                sortDatabase = true;
+                                                            }
+                                                        } catch (Exception e) {
+                                                            System.out.println("Try again");
+                                                            sortDatabase = true;
+                                                        }
+                                                    } while (sortDatabase == true);
+                                                    viewStats = true;
+                                                } else if (database == 2) {
+                                                    marketplace.printStoreStatsBuyer(buyer);
+                                                    System.out.println();
+                                                    viewStats = true;
+                                                } else if (database == 3) {
+                                                    viewStats = false;
+                                                } else {
+                                                    System.out.println("Try again");
+                                                    viewStats = true;
+                                                }
+                                            } catch (Exception e) {
+                                                System.out.println("Try again");
+                                                viewStats = true;
+                                            }
+                                        } while (viewStats == true);
+                                    } else if (selectedStore == marketplace.getAllStores().size() + 5) { // export purchase history
+                                        boolean works = true;
+                                        do {
+                                            System.out.println("Enter file name");
+                                            try {
+                                                buyer.exportPurchaseList(scan.nextLine());
+                                                works = true;
+                                            } catch (Exception e) {
+                                                System.out.println("Try again");
+                                                works = false;
+                                            }
+                                        } while (works == false);
+                                    } else {
+                                        System.out.println("Try again");
+                                    }
+                                } catch (Exception e) {
+                                    buyerChoice = true;
+                                }
+                            } while (buyerChoice == true);
 
                         }
 
