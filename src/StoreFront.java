@@ -268,7 +268,18 @@ public class StoreFront {
             System.out.print((i + 1) + ". " + currentProduct.getName());
             System.out.println(", Price: " + currentProduct.getPrice());
         }
+    }
 
+    public void printStoreFrontByList(ArrayList<Product> list) {
+        System.out.println(storeFrontName);
+        System.out.println("-----------------------");
+
+        for (int i = 0; i < list.size(); i++) {
+            Product currentProduct = (list.get(i));
+
+            System.out.print((i + 1) + ". " + currentProduct.getName());
+            System.out.println(", Price: " + currentProduct.getPrice());
+        }
     }
 
     public void updateProduct(Product oldP, Product newP) {
