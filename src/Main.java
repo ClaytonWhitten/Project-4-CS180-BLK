@@ -620,7 +620,7 @@ public class Main {
                                                     System.out.println("1. Back");
                                                     try {
                                                         int num1 = Integer.parseInt(scan.nextLine());
-                                                        if (num1 == 0) {
+                                                        if (num1 == 1) {
                                                             numCheck1 = true;
                                                         } else {
                                                             numCheck1 = false;

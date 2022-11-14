@@ -2,7 +2,7 @@
 ## Compiling and Running the Marketplace
 All the user interaction for this project will occur from within the terminal through the running of the main method of the Main class.
 To run it, first compile all the classes and then simply run the main method of Main.java to begin using the marketplace.
-The user will navgate the menu through using numbers associated with menu options, and type further details when prompted.
+The user will navigate the menu through using numbers associated with menu options, and type further details when prompted.
 
 ## Who submitted what?
 
