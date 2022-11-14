@@ -100,7 +100,7 @@ public class Seller extends User {
                         }
                     }
                     if (lines.get(j).equalsIgnoreCase("*****")) {
-                        storeFronts.add(new StoreFront(tempStorefrontName, super.getUsername(), tempProductsList, tempSalesList));
+                        storeFronts.add(new StoreFront(tempStorefrontName, super.getUsername(), (ArrayList<Product>) tempProductsList.clone(), (ArrayList<Sale>) tempSalesList.clone()));
                         tempProductsList.clear();
                         tempSalesList.clear();
                         i = j;
@@ -138,22 +138,6 @@ public class Seller extends User {
                 }
             }
         }
-    }
-
-    public void updateSeller() throws IOException {
-        File file = new File(this.getUsername() + ".txt");
-        BufferedReader bfr = new BufferedReader(new FileReader(file));
-
-        String line = bfr.readLine();
-        bfr.readLine(); // skip first line
-        while (bfr.ready()) {
-            if (line.contains("*****")) {
-                while (bfr.readLine() != "*****") {
-
-                }
-            }
-        }
-
     }
 
     public ArrayList<StoreFront> getStoreFronts() {
