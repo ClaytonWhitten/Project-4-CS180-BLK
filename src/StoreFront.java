@@ -95,7 +95,7 @@ public class StoreFront {
             sales.add(sale);
         return sale;
     }
-    
+
     public HashMap<String, Integer> getDataByCustomer() {
         HashMap<String, Integer> map = new HashMap<>();
         int num = 0;

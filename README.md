@@ -5,6 +5,10 @@ To run it, first compile all the classes and then simply run the main method of 
 The user will navigate the menu through using numbers associated with menu options, and type further details when prompted.
 
 ## Who submitted what?
+Paraj Goyal submitted the Report on Brightspace
+
+Aadit Bennur submitted the Vocareum workspace
+
 
 ## Class descriptions
 ### User:
