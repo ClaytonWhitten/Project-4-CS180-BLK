@@ -146,8 +146,8 @@ public class Marketplace {
         this.allProducts = allProducts;
     }
 
-    public ArrayList<Product> sort(String sortValue, boolean desc) {
-        ArrayList<Product> sortedList = (ArrayList<Product>) allProducts.clone();
+    public ArrayList<Product> sort(String sortValue, boolean desc, ArrayList<Product> list) {
+        ArrayList<Product> sortedList = (ArrayList<Product>) list.clone();
 
         if (sortValue.equalsIgnoreCase("price")) {
             Collections.sort(sortedList, Product.priceCompare(desc));
@@ -197,6 +197,13 @@ public class Marketplace {
             allStores.get(i).printStoreFront();
             if (i < allStores.size() - 1)
                 System.out.println("");
+        }
+    }
+
+    public void printListStorefronts () { //returns a numbered list of storefronts
+        for (int i = 0; i < allStores.size(); i++) {
+            System.out.print((i + 2) + ". ");
+            System.out.println(allStores.get(i).getStoreFrontName());
         }
     }
 }
