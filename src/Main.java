@@ -921,7 +921,7 @@ public class Main {
                                                         try {
                                                             int sorter = Integer.parseInt(scan.nextLine());
                                                             if (sorter == 1) {
-
+                                                                
                                                                 sortDatabase = true;
                                                             } else if (sorter == 2) {
 
