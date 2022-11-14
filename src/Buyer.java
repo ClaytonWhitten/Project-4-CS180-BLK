@@ -63,7 +63,7 @@ public class Buyer extends User {
 
         for (int i = 0; i < lines.size(); i++) {
             if (lines.get(i).charAt(0) == '-') {
-                tpf = lines.get(i).split("::");
+                tpf = lines.get(i).substring(1).split("::");
                 shoppingCart.add(new Product(tpf[0], tpf[1], tpf[2], Integer.parseInt(tpf[3]), 
                     Double.parseDouble(tpf[4]), Integer.parseInt(tpf[5])));
             }

@@ -89,7 +89,7 @@ public class Seller extends User {
                         tempStorefrontName = lines.get(j);
                     }
                     if (lines.get(j).charAt(0) == '-') {
-                        tpf = lines.get(j).split("::");
+                        tpf = lines.get(j).substring(1).split("::");
                         tempProductsList.add(new Product(tpf[0], tpf[1], tpf[2], Integer.parseInt(tpf[3]), Double.parseDouble(tpf[4]), Integer.parseInt(tpf[5])));
                     }
                     if (lines.get(j).charAt(0) == '>') {
