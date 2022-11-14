@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
-        int choice;
+        int choice = 0;
 
         do {
 
@@ -15,12 +15,16 @@ public class Main {
             do { // initial prompt
 
                 System.out.printf("1. Login\n2. Signup\n3. Exit\n");
-                choice = scan.nextInt();
-                scan.nextLine();
+                try {
+                    choice = scan.nextInt();
+                    scan.nextLine();
+                } catch (Exception e) {
+                    System.out.println("Please enter an integer!");
+                }
 
             } while (choice != 1 && choice != 2 && choice != 3);
 
-            int answer;
+            int answer = 0;
 
             do {
 
@@ -40,11 +44,15 @@ public class Main {
                     if (!(user.login())) { // user login fails
 
                         System.out.println("Your username or password is incorrect.");
-                        System.out.printf("1. Try again?\n2. Signup\n");
 
                         do {
-                            answer = scan.nextInt();
-                            scan.nextLine();
+                            System.out.printf("1. Try again?\n2. Signup\n");
+                            try {
+                                answer = scan.nextInt();
+                                scan.nextLine();
+                            } catch (Exception e) {
+                                System.out.println("Please enter an integer!");
+                            }
                         } while (answer != 1 && answer != 2);
 
                         if (answer == 1) {
@@ -62,12 +70,16 @@ public class Main {
 
                             if (seller.getStoreFronts().isEmpty()) { // the seller has no stores
 
-                                int createOrLogout;
+                                int createOrLogout = 0;
                                 System.out.println("You don't have any stores!");
                                 do {
                                     System.out.printf("1. Create a store\n2. Logout\n");
-                                    createOrLogout = scan.nextInt();
-                                    scan.nextLine();
+                                    try {
+                                        createOrLogout = scan.nextInt();
+                                        scan.nextLine();
+                                    } catch (Exception e) {
+                                        System.out.println("Please enter an integer!");
+                                    }
                                 } while (createOrLogout != 1 && createOrLogout != 2);
 
                                 if (createOrLogout == 1) {
@@ -109,7 +121,7 @@ public class Main {
                             }
 
                             if (!(seller.getStoreFronts().isEmpty())) { // the seller has stores
-                                int sellerOptions;
+                                int sellerOptions = 0;
                                 int storeFrontOptions = 0;
 
                                 do { // for the "back" functionality
@@ -117,13 +129,17 @@ public class Main {
                                     do {
                                         System.out.printf("Seller Menu\n********\n");
                                         System.out.printf("1. View all stores\n2. Create a store\n3. Logout\n");
-                                        sellerOptions = scan.nextInt();
-                                        scan.nextLine();
+                                        try {
+                                            sellerOptions = scan.nextInt();
+                                            scan.nextLine();
+                                        } catch (Exception e) {
+                                            System.out.println("Please enter an integer!");
+                                        }
                                     } while (sellerOptions != 1 && sellerOptions != 2 && sellerOptions != 3);
 
                                     if (sellerOptions == 1) { // user views all stores
                                         int count = 0;
-                                        int storeSelection;
+                                        int storeSelection = 0;
 
                                         for (int i = 0; i < seller.getStoreFronts().size(); i++) {
                                             count++;
@@ -132,8 +148,12 @@ public class Main {
                                         do {
                                             System.out.println("Store Selection:");
                                             seller.printStoreFronts();
-                                            storeSelection = scan.nextInt();
-                                            scan.nextLine();
+                                            try {
+                                                storeSelection = scan.nextInt();
+                                                scan.nextLine();
+                                            } catch (Exception e) {
+                                                System.out.println("Please enter an integer!");
+                                            }
                                         } while (storeSelection < 1 && storeSelection > count);
 
                                         boolean back = true;
@@ -142,17 +162,25 @@ public class Main {
                                             do {
                                                 System.out.println("Current store: " + seller.getStoreFronts().get(storeSelection - 1).getStoreFrontName());
                                                 System.out.printf("1. Import list of products\n2. Edit products\n3. View history\n4. Export list of products\n5. Back\n");
-                                                storeFrontOptions = scan.nextInt();
-                                                scan.nextLine();
+                                                try {
+                                                    storeFrontOptions = scan.nextInt();
+                                                    scan.nextLine();
+                                                } catch (Exception e) {
+                                                    System.out.println("Please enter an integer!");
+                                                }
                                             } while (storeFrontOptions != 1 && storeFrontOptions != 2 && storeFrontOptions != 3 && storeFrontOptions != 4 && storeFrontOptions != 5);
 
                                             if (storeFrontOptions == 1) { // user wants to import a list of products
-                                                int fileOrBack;
+                                                int fileOrBack = 0;
                                                 System.out.println("Correct file format:\nname::storeFrontName::description::availableQuantity::price");
                                                 do {
                                                     System.out.printf("1. Enter file\n2. Back\n");
-                                                    fileOrBack = scan.nextInt();
-                                                    scan.nextLine();
+                                                    try {
+                                                        fileOrBack = scan.nextInt();
+                                                        scan.nextLine();
+                                                    } catch (Exception e) {
+                                                        System.out.println("Please enter an integer!");
+                                                    }
                                                 } while (fileOrBack != 1 && fileOrBack != 2);
 
                                                 if (fileOrBack == 1) {
@@ -163,7 +191,7 @@ public class Main {
                                                             seller.getStoreFronts().get(i).importProducts(fileName);
                                                             System.out.println("Products added!");
                                                         } catch (Exception e) {
-                                                            // nothing
+                                                            System.out.println("File is invalid");
                                                         }
                                                     }
                                                     seller.logOut();
@@ -172,21 +200,29 @@ public class Main {
                                                 }
 
                                             } else if (storeFrontOptions == 2) { // user wants to edit products
-                                                int productOptions;
+                                                int productOptions = 0;
                                                 do {
                                                     System.out.printf("1. Choose product\n2. Add product\n3. Back\n");
-                                                    productOptions = scan.nextInt();
-                                                    scan.nextLine();
+                                                    try {
+                                                        productOptions = scan.nextInt();
+                                                        scan.nextLine();
+                                                    } catch (Exception e) {
+                                                        System.out.println("Please enter an integer!");
+                                                    }
                                                 } while (productOptions != 1 && productOptions != 2 && productOptions != 3);
 
-                                                int productSelection;
+                                                int productSelection = 0;
                                                 if (productOptions == 1) { // user wants to choose a product
                                                     System.out.println("Product format:");
                                                     System.out.println("name::storeFrontName::description::availableQuantity::price::amountInCarts");
                                                     do {
                                                         seller.getStoreFronts().get(storeSelection - 1).printProducts();
-                                                        productSelection = scan.nextInt();
-                                                        scan.nextLine();
+                                                        try {
+                                                            productSelection = scan.nextInt();
+                                                            scan.nextLine();
+                                                        } catch (Exception e) {
+                                                            System.out.println("Please enter an integer!");
+                                                        }
                                                     } while (productSelection < 1 && productSelection > seller.getStoreFronts().get(storeSelection - 1).getProducts().size());
 
                                                     System.out.println("What is the name of the product?");
@@ -234,15 +270,19 @@ public class Main {
                                                 }
 
                                             } else if (storeFrontOptions == 3) { // user wants to view history of sales
-                                                int viewHistOrBack;
+                                                int viewHistOrBack = 0;
                                                 do {
                                                     System.out.println("Sales format:");
                                                     System.out.println("customerInfo,productName,quantity,revenue");
                                                     seller.getStoreFronts().get(storeSelection - 1).printSales();
                                                     System.out.println("-----------------------");
                                                     System.out.printf("1. View history again\n2. Back\n");
-                                                    viewHistOrBack = scan.nextInt();
-                                                    scan.nextLine();
+                                                    try {
+                                                        viewHistOrBack = scan.nextInt();
+                                                        scan.nextLine();
+                                                    } catch (Exception e) {
+                                                        System.out.println("Please enter an integer!");
+                                                    }
                                                 } while (viewHistOrBack == 1 || (viewHistOrBack != 1 && viewHistOrBack != 2));
 
                                                 if (viewHistOrBack == 2) {
@@ -252,12 +292,16 @@ public class Main {
 
                                             } else if (storeFrontOptions == 4) { // user wants to export products
 
-                                                int fileOrBack;
+                                                int fileOrBack = 0;
                                                 System.out.println("File format will be as follows:\nname::storeFrontName::description::availableQuantity::price");
                                                 do {
                                                     System.out.printf("1. Export products from %s\n2. Back\n", seller.getStoreFronts().get(storeSelection - 1).getStoreFrontName());
-                                                    fileOrBack = scan.nextInt();
-                                                    scan.nextLine();
+                                                    try {
+                                                        fileOrBack = scan.nextInt();
+                                                        scan.nextLine();
+                                                    } catch (Exception e) {
+                                                        System.out.println("Please enter an integer!");
+                                                    }
                                                 } while (fileOrBack != 1 && fileOrBack != 2);
 
                                                 if (fileOrBack == 1) {
@@ -836,7 +880,7 @@ public class Main {
                     String newUsername;
                     String newPassword;
                     String agentType = "";
-                    int sellOrBuy;
+                    int sellOrBuy = 0;
                     User user = null;
 
                     do {
@@ -849,8 +893,12 @@ public class Main {
 
                         do {
                             System.out.printf("Are you a seller or buyer?\n1. Seller\n2. Buyer\n");
-                            sellOrBuy = scan.nextInt();
-                            scan.nextLine();
+                            try {
+                                sellOrBuy = scan.nextInt();
+                                scan.nextLine();
+                            } catch (Exception e) {
+                                System.out.println("Please enter an integer!");
+                            }
                         } while (sellOrBuy != 1 && sellOrBuy != 2);
 
                         if (sellOrBuy == 1) {
@@ -867,10 +915,15 @@ public class Main {
                             break;
                         } else {
 
-                            System.out.println("User already exists!\n1. Login\n2. Signup\n3. Exit\n");
-                            int temp;
+                            int temp = 0;
                             do {
-                                temp = scan.nextInt();
+                                System.out.println("User already exists!\n1. Login\n2. Signup\n3. Exit\n");
+                                try {
+                                    temp = scan.nextInt();
+                                    scan.nextLine();
+                                } catch (Exception e) {
+                                    System.out.println("Please enter an integer!");
+                                }
                             } while (temp != 1 && temp != 2 && temp != 3);
 
                             if (temp == 1) {
