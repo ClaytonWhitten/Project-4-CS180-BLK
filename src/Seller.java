@@ -103,7 +103,6 @@ public class Seller extends User {
                     }
                     if (lines.get(j).equalsIgnoreCase("*****")) {
                         storeFronts.add(new StoreFront(tempStorefrontName, super.getUsername(), tempProductsList, tempSalesList));
-                        System.out.println(tempProductsList);
                         storeFronts.get(count).setProducts(tempProductsList);
                         count++;
                         tempProductsList.clear();
