@@ -16,12 +16,13 @@ public class StoreFront {
     }
 
     public StoreFront(String storeFrontName, String sellerUsername, ArrayList<Product> products) {
-      this.storeFrontName = storeFrontName;
-      this.sellerUsername = sellerUsername;
-      this.products = products;
+        this.storeFrontName = storeFrontName;
+        this.sellerUsername = sellerUsername;
+        this.products = products;
     }
 
-    public StoreFront(String storeFrontName, String sellerUsername, ArrayList<Product> products, ArrayList<Sale> sales) {
+    public StoreFront(String storeFrontName, String sellerUsername,
+                      ArrayList<Product> products, ArrayList<Sale> sales) {
         this.storeFrontName = storeFrontName;
         this.sellerUsername = sellerUsername;
         this.products = products;
@@ -77,7 +78,7 @@ public class StoreFront {
                     return null;
                 } else {
                     p.setAvailableQuantity(p.getAvailableQuantity() - quantity);
-                    sale = new Sale(buyer.getUsername(), productName, quantity, p.getPrice()*quantity);
+                    sale = new Sale(buyer.getUsername(), productName, quantity, p.getPrice() * quantity);
                 }
 
             }
@@ -87,17 +88,7 @@ public class StoreFront {
         return sale;
     }
 
-    /*
-    Get Data By Customer:
-    The handout says the following - "Sellers can view a dashboard that lists statistics for each of their stores.
-    Data will include a list of customers with the number of items that they have purchased and a list of products
-    with the number of sales."
-    - In response to the first part, this method will return a list of customers and the number of products they have bought.
-    - It will do this by returning an arraylist of HashMaps, where the key is the customer info and the value mapped to each
-    key is the total number of products they have bought.
-    - If the customer has multiple sales to their name, it will simply add the quantity of the new sale to the total quantity
-    in the arraylist
-     */
+
     public ArrayList<Map<String, Integer>> getDataByCustomer() {
         ArrayList<Map<String, Integer>> list = new ArrayList<>();
         boolean newCustomer = true;
@@ -126,17 +117,7 @@ public class StoreFront {
         }
     }
 
-    /*
-    Get Data By Product:
-    The handout says the following - "Sellers can view a dashboard that lists statistics for each of their stores.
-    Data will include a list of customers with the number of items that they have purchased and a list of products
-    with the number of sales."
-    - In response to the second part, this method will return a list of products and the quantity sold of each.
-    - It will do this by returning an arraylist of HashMaps, where the key is the product name and the value mapped to each
-    key is the number of that product that has been purchased.
-    - If the product has multiple sales to their name, it will simply add the quantity of the new sale to the total quantity
-    in the arraylist
-     */
+
     public ArrayList<Map<String, Integer>> getDataByProduct() {
         ArrayList<Map<String, Integer>> list = new ArrayList<>();
         boolean newProduct = true;
