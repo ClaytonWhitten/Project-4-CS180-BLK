@@ -801,7 +801,7 @@ public class Main {
                                     buyerChoice = true;
                                 }
                             } while (buyerChoice == true);
-
+                            buyer.logOut();
                         }
 
                     }
