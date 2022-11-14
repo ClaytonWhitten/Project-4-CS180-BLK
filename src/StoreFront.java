@@ -207,7 +207,7 @@ public class StoreFront {
             }
             if (tempProductFields[0].equalsIgnoreCase("") ||
                     tempProductFields[1].equalsIgnoreCase("") ||
-                    !tempProductFields[1].equalsIgnoreCase(storeFrontName) ||
+                    !(tempProductFields[1].equalsIgnoreCase(storeFrontName)) ||
                     tempProductFields[2].equalsIgnoreCase("")) {
                 System.out.println("Error Adding Product");
                 continue;
