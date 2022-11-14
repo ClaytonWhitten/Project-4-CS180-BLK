@@ -22,3 +22,24 @@ properly and also tested to make sure that the interactions a buyer had with the
 
 ### Seller:
 The seller class is another subclass of the User class, this time with an additional field for the seller's list of storefronts (Storefront class).
+Once again this class includes methods to read and write to the seller's data file with the proper formatting, along with methods to add
+new storefronts. This class is used by the Marketplace class because the marketplace creates seller objects to be able to read each seller's
+data when setting up the marketplace for a buyer. We tested this method by ensuring that the output to and input from the seller's files worked
+properly and also tested to make sure that the interactions a buyer had with the marketplace were properly reflected in the sellers' files too.
+
+### Product:
+The product class holds basic information about a project within a seller's storefront. This info includes the product's name, store, description, available quantity, price, and the
+number of carts it's been added into. The class also has various methods for printint to be called in other places within the program. Overall, Product interacts with the whole project,
+since it is held within a list of products for a storefront which is in a list of stores for a seller in the marketplace. We tested the methods of this class simply by testing the print
+and toString methods to verify outputs into the terminal and user files.
+
+### Sale:
+The sale class is a class simply meant to store information about any purchase made. This information includes the customer info, product name, amount purhcased, and the revenue from the purchase.
+These sale objects are added to lists in both a buyer's data ans also in every storefront. This means that
+the object instances of the Sale class can then be used to provide statistics for both buyers and sellers as to what purchases had been made. In terms of testing, the only type of testing we had
+to do for this class was to verify that the getter, setters, and toString worked properly and outputted the right stuff.
+
+### Storefront:
+The Storefront class is meant to be a store that is created by a Seller and holds multiple products in a list (Product class) along with a list of purchase history of that storefront (Sale class). 
+Naturally, the class interacts with product and sale, however it also interacts with Marketplace and therefore, indirectly with us. The way we test the methods in this class is through testing the Marketplace
+class's methods along with this method's print methods and such. Finally we also had to make sure that the storefronts were being properly added to a seller's file.
