@@ -182,16 +182,21 @@ public class Main {
 
                                             do {
                                                 System.out.println("Current store: " +
-                                                        seller.getStoreFronts().get(storeSelection - 1).getStoreFrontName());
-                                                System.out.printf("1. Import list of products\n2. Export list of products\n3. View history" +
-                                                        "\n4. View statistics\n5. View products by shopping carts\n6. Edit products\n7. Back\n");
+                                                        seller.getStoreFronts().get(storeSelection
+                                                                - 1).getStoreFrontName());
+                                                System.out.printf("1. Import list of products" +
+                                                        "\n2. Export list of products\n3. View history" +
+                                                        "\n4. View statistics\n5. View products by shopping carts" +
+                                                        "\n6. Edit products\n7. Back\n");
                                                 try {
                                                     storeFrontOptions = Integer.parseInt(scan.nextLine());
                                                 } catch (Exception e) {
                                                     System.out.println("Please enter an integer!");
                                                 }
-                                            } while (storeFrontOptions != 1 && storeFrontOptions != 2 && storeFrontOptions != 3 &&
-                                                    storeFrontOptions != 4 && storeFrontOptions != 5 && storeFrontOptions != 6 && storeFrontOptions != 7);
+                                            } while (storeFrontOptions != 1 && storeFrontOptions != 2 &&
+                                                    storeFrontOptions != 3 &&
+                                                    storeFrontOptions != 4 && storeFrontOptions != 5 &&
+                                                    storeFrontOptions != 6 && storeFrontOptions != 7);
 
                                             if (storeFrontOptions == 1) { // user wants to import a list of products
                                                 int fileOrBack = 0;
@@ -226,11 +231,13 @@ public class Main {
                                             } else if (storeFrontOptions == 2) { // user wants to export products
 
                                                 int fileOrBack = 0;
-                                                System.out.println("File format will be as follows:\nname::storeFrontName:" +
+                                                System.out.println("File format will be as follows:\nname:" +
+                                                        ":storeFrontName:" +
                                                         ":description::availableQuantity::price");
                                                 do {
                                                     System.out.printf("1. Export products from %s\n2. Back\n",
-                                                            seller.getStoreFronts().get(storeSelection - 1).getStoreFrontName());
+                                                            seller.getStoreFronts().get(storeSelection
+                                                                    - 1).getStoreFrontName());
                                                     try {
                                                         fileOrBack = Integer.parseInt(scan.nextLine());
                                                     } catch (Exception e) {
@@ -584,7 +591,8 @@ public class Main {
                                                         }
                                                     } while (worked = false);
                                                 } else if (selectedProduct ==
-                                                        marketplace.getAllProducts().size() + 2) { // sorting by quantity
+                                                        marketplace.getAllProducts().size()
+                                                                + 2) { // sorting by quantity
                                                     productChoice = true;
                                                     sorted = true;
                                                     do {
@@ -666,7 +674,8 @@ public class Main {
                                                                                         scan.nextLine());
                                                                                 if (quantityDesired >
                                                                                         currentList.get(selectedProduct
-                                                                                                - 1).getAvailableQuantity()
+                                                                                                - 1
+                                                                                        ).getAvailableQuantity()
                                                                                 ) {
                                                                                     System.out.println("Not enough " +
                                                                                             "available items");
@@ -833,7 +842,9 @@ public class Main {
                                                                             System.out.println("Select quantity: ");
                                                                             try {
                                                                                 int quantityDesired
-                                                                                        = Integer.parseInt(scan.nextLine());
+                                                                                        =
+                                                                                        Integer.parseInt(scan.nextLine()
+                                                                                        );
                                                                                 if (quantityDesired
                                                                                         > currentList.get(searchInt
                                                                                         - 1).getAvailableQuantity()) {
@@ -1015,7 +1026,8 @@ public class Main {
                                         } while (viewCart == true);
 
                                     } else if (selectedStore
-                                            == marketplace.getAllStores().size() + 4) { // user chose to view statistics
+                                            == marketplace.getAllStores().size()
+                                            + 4) { // user chose to view statistics
                                         boolean viewStats = false;
                                         do {
                                             System.out.println("Which database would you like to view?");
