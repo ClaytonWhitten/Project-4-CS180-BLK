@@ -82,21 +82,20 @@ public class StoreFront {
             Product p = products.get(i);
             if (p.getName().equalsIgnoreCase(productName)) {
                 if (p.getAvailableQuantity() - quantity <= 0) {
-                    return null;
+                    p.decrementCartNum(quantity);
+                    System.out.println("Cannot purchase " + p.getName() + " due to insufficient supply");
                 } else {
                     p.setAvailableQuantity(p.getAvailableQuantity() - quantity);
                     p.decrementCartNum(quantity);
                     sale = new Sale(buyer.getUsername(), productName, quantity, p.getPrice() * quantity);
                 }
-
             }
         }
         if (sale != null)
             sales.add(sale);
         return sale;
     }
-
-
+    
     public HashMap<String, Integer> getDataByCustomer() {
         HashMap<String, Integer> map = new HashMap<>();
         int num = 0;

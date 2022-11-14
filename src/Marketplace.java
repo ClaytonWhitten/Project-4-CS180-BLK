@@ -94,9 +94,13 @@ public class Marketplace {
     }
 
     public void buyCart(Buyer buyer) {
+        Sale s = null;
         for (int i = 0; i < buyer.getShoppingCart().size(); i++) {
-            buyer.addSale(buyItem(buyer, buyer.getShoppingCart().get(i).getStoreFrontName(),
-                    buyer.getShoppingCart().get(i).getName(), buyer.getCartQuantities().get(i)));
+            s = buyItem(buyer, buyer.getShoppingCart().get(i).getStoreFrontName(),
+                    buyer.getShoppingCart().get(i).getName(), buyer.getCartQuantities().get(i));
+            if (s != null) {
+                buyer.addSale(s);
+            }
         }
         buyer.setCartQuantities(new ArrayList<>());
         buyer.setShoppingCart(new ArrayList<>());
