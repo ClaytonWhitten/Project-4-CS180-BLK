@@ -14,6 +14,7 @@ import java.io.*;
 import java.lang.reflect.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.concurrent.ThreadLocalRandom;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.CopyOption;
@@ -241,16 +242,21 @@ public class Tests {
         (new File("SellerB.txt")).delete();
         (new File("SellerC.txt")).delete();
         (new File("sellers.txt")).delete();
-        Product a = new Product("PRODUCTA", "STOREA", "DESCA", 100, 2.49);
-        Product a2 = new Product("PRODUCTA2", "STOREA", "DESCA2", 100, 3.49);
-        Product b = new Product("PRODUCTB", "STOREB", "DESCB", 100, 4.99);
-        Product b2 = new Product("PRODUCTB2", "STOREB", "DESCB2", 100, 5.99);
-        Product c = new Product("PRODUCTC", "STOREC", "DESCC", 100, 6.89);
-        Product c2 = new Product("PRODUCTC2", "STOREC", "DESCC2", 100, 7.89);
+        (new File("sellersOriginal.txt")).delete();
+        Product a = new Product("PRODUCTA", "STOREA", "DESCA", 10, 2.49);
+        Product a2 = new Product("PRODUCTA2", "STOREA", "DESCA2", 20, 3.49);
+        Product b = new Product("PRODUCTB", "STOREB", "DESCB", 30, 4.99);
+        Product b2 = new Product("PRODUCTB2", "STOREB", "DESCB2", 40, 5.99);
+        Product c = new Product("PRODUCTC", "STOREC", "DESCC", 50, 6.89);
+        Product c2 = new Product("PRODUCTC2", "STOREC", "DESCC2", 60, 7.89);
 
         Seller sellerA = new Seller("SellerA", "seller");
         Seller sellerB = new Seller("SellerB", "seller");
         Seller sellerC = new Seller("SellerC", "seller");
+
+        sellerA.signUp();
+        sellerB.signUp();
+        sellerC.signUp();
 
         sellerA.addStore("STOREA", "SellerA",
             new ArrayList<Product>(Arrays.asList(a, a2)));
@@ -262,6 +268,8 @@ public class Tests {
         sellerA.logOut();
         sellerB.logOut();
         sellerC.logOut();
+
+        Files.copy(Paths.get("sellers.txt"), Paths.get("sellersOriginal.txt"), new CopyOption[0]);
 
         Marketplace marketplace = new Marketplace();
 
@@ -287,7 +295,28 @@ public class Tests {
         // revenue equal with 1/10th cent epsilon
         assertEquals(3.49 * 2, sale.getRevenue(), 0.001);
 
-        Files.copy(Paths.get("sellers.txt"), Paths.get("sellersOriginal.txt"), new CopyOption[0]);
+        ArrayList<Product> priceAsc = marketplace.sort("price", false, marketplace.getAllProducts());
+        ArrayList<Product> priceDesc = marketplace.sort("price", true, marketplace.getAllProducts());
+        ArrayList<Product> quantAsc = marketplace.sort("quantity", false, marketplace.getAllProducts());
+        ArrayList<Product> quantDesc = marketplace.sort("quantity", true, marketplace.getAllProducts());
+        Collections.reverse(priceDesc);
+        Collections.reverse(quantDesc);
+
+        // product list ordering works properly
+        for (int i = 0; i < priceAsc.size(); i++) {
+            assertEquals(priceAsc.get(i).toString(), priceDesc.get(i).toString());
+            assertEquals(quantAsc.get(i).toString(), quantDesc.get(i).toString());
+        }
+
+        // search method works
+        ArrayList<Product> someResults = marketplace.search("DESC");
+        assertEquals(6, someResults.size());
+
+        ArrayList<Product> noResults = marketplace.search("PRODUCTD");
+        assertEquals(0, noResults.size());
+
+        marketplace.closeMarketplace();
+        // sellers file persistence works
         assertEquals(-1L, Files.mismatch(Paths.get("sellers.txt"), Paths.get("sellersOriginal.txt")));
     }
 }
