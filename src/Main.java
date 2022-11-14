@@ -613,113 +613,133 @@ public class Main {
                                             String buyerSearch = scan.nextLine();
                                             ArrayList<Product> currentList = new ArrayList<>();
                                             currentList = marketplace.search(buyerSearch);
-                                            do {
-                                                marketplace.printProductList(currentList);
-                                                System.out.println((currentList.size() + 1) + ". Sort by Price");
-                                                System.out.println((currentList.size() + 2) + ". Sort by Quantity");
-                                                System.out.println((currentList.size() + 3) + ". Back");
-                                                try {
-                                                    int searchInt = Integer.parseInt(scan.nextLine());
-                                                    if (searchInt >= 1 && searchInt <= currentList.size()) { // user selected a product
-                                                        worked2 = true;
-                                                        boolean check4 = true;
-                                                        int buyOrBack1;
-                                                        do {
-                                                            currentList.get(searchInt - 1).printProductDetails();
-                                                            System.out.println("1. Buy");
-                                                            System.out.println("2. Back");
-                                                            try {
-                                                                buyOrBack1 = Integer.parseInt(scan.nextLine());
-                                                                if (buyOrBack1 == 1) { // user wants to buy
-                                                                    check4 = true;
-                                                                    boolean check3 = true;
-                                                                    do {
-                                                                        System.out.println("Select quantity: ");
-                                                                        try {
-                                                                            int quantityDesired = Integer.parseInt(scan.nextLine());
-                                                                            if (quantityDesired > currentList.get(searchInt - 1).getAvailableQuantity()) {
-                                                                                System.out.println("Not enough available items");
-                                                                                check3 = false;
-                                                                            } else if (quantityDesired > 0) {
-                                                                                check3 = true;
-                                                                                marketplace.addToCart(buyer, currentList.get(searchInt - 1), quantityDesired);
-                                                                            } else {
+                                            if (currentList.size() == 0) {
+                                                System.out.println("No search results");
+                                                boolean numCheck1 = true;
+                                                do {
+                                                    System.out.println("1. Back");
+                                                    try {
+                                                        int num1 = Integer.parseInt(scan.nextLine());
+                                                        if (num1 == 0) {
+                                                            numCheck1 = true;
+                                                        } else {
+                                                            numCheck1 = false;
+                                                        }
+                                                    } catch (Exception e) {
+                                                        numCheck1 = false;
+                                                        System.out.println("Try again");
+                                                    }
+                                                } while (numCheck1 == false);
+                                                search1 = false;
+                                            } else {
+                                                do {
+                                                    marketplace.printProductList(currentList);
+                                                    System.out.println((currentList.size() + 1) + ". Sort by Price");
+                                                    System.out.println((currentList.size() + 2) + ". Sort by Quantity");
+                                                    System.out.println((currentList.size() + 3) + ". Back");
+                                                    try {
+                                                        int searchInt = Integer.parseInt(scan.nextLine());
+                                                        if (searchInt >= 1 && searchInt <= currentList.size()) { // user selected a product
+                                                            worked2 = true;
+                                                            boolean check4 = true;
+                                                            int buyOrBack1;
+                                                            do {
+                                                                currentList.get(searchInt - 1).printProductDetails();
+                                                                System.out.println("1. Buy");
+                                                                System.out.println("2. Back");
+                                                                try {
+                                                                    buyOrBack1 = Integer.parseInt(scan.nextLine());
+                                                                    if (buyOrBack1 == 1) { // user wants to buy
+                                                                        check4 = true;
+                                                                        boolean check3 = true;
+                                                                        do {
+                                                                            System.out.println("Select quantity: ");
+                                                                            try {
+                                                                                int quantityDesired = Integer.parseInt(scan.nextLine());
+                                                                                if (quantityDesired > currentList.get(searchInt - 1).getAvailableQuantity()) {
+                                                                                    System.out.println("Not enough available items");
+                                                                                    check3 = false;
+                                                                                } else if (quantityDesired > 0) {
+                                                                                    check3 = true;
+                                                                                    marketplace.addToCart(buyer, currentList.get(searchInt - 1), quantityDesired);
+                                                                                } else {
+                                                                                    check3 = false;
+                                                                                }
+                                                                            } catch (Exception e) {
                                                                                 check3 = false;
                                                                             }
-                                                                        } catch (Exception e) {
-                                                                            check3 = false;
-                                                                        }
-                                                                    } while (check3 == false);
-                                                                    search1 = false;
-                                                                } else if (buyOrBack1 == 2) { // user wants to go back
-                                                                    check4 = true;
-                                                                    search1 = true;
-                                                                } else {
+                                                                        } while (check3 == false);
+                                                                        search1 = false;
+                                                                    } else if (buyOrBack1 == 2) { // user wants to go back
+                                                                        check4 = true;
+                                                                        search1 = true;
+                                                                    } else {
+                                                                        check4 = false;
+                                                                    }
+                                                                } catch (Exception e) {
                                                                     check4 = false;
                                                                 }
-                                                            } catch (Exception e) {
-                                                                check4 = false;
-                                                            }
-                                                        } while (check4 = false);
-                                                    } else if (searchInt == currentList.size() + 1) { // sort by price
-                                                        search1 = true;
-                                                        do {
-                                                            System.out.println("How would you like to sort?");
-                                                            System.out.println("1. Ascending");
-                                                            System.out.println("2. Descending");
-                                                            try {
-                                                                ascOrDes2 = Integer.parseInt(scan.nextLine());
-                                                                if (ascOrDes2 == 1) {
-                                                                    worked3 = true;
-                                                                    currentList = marketplace.sort("price", false, currentList);
-                                                                } else if (ascOrDes2 == 2) {
-                                                                    worked3 = true;
-                                                                    currentList = marketplace.sort("price", true, currentList);
-                                                                } else {
+                                                            } while (check4 = false);
+                                                        } else if (searchInt == currentList.size() + 1) { // sort by price
+                                                            search1 = true;
+                                                            do {
+                                                                System.out.println("How would you like to sort?");
+                                                                System.out.println("1. Ascending");
+                                                                System.out.println("2. Descending");
+                                                                try {
+                                                                    ascOrDes2 = Integer.parseInt(scan.nextLine());
+                                                                    if (ascOrDes2 == 1) {
+                                                                        worked3 = true;
+                                                                        currentList = marketplace.sort("price", false, currentList);
+                                                                    } else if (ascOrDes2 == 2) {
+                                                                        worked3 = true;
+                                                                        currentList = marketplace.sort("price", true, currentList);
+                                                                    } else {
+                                                                        worked3 = false;
+                                                                    }
+                                                                } catch (Exception e) {
                                                                     worked3 = false;
                                                                 }
-                                                            } catch (Exception e) {
-                                                                worked3 = false;
-                                                            }
-                                                        } while (worked3 == false);
-                                                        worked2 = false;
-                                                    } else if (searchInt == currentList.size() + 2) { // sort by quantity
-                                                        search1 = true;
-                                                        do {
-                                                            System.out.println("How would you like to sort?");
-                                                            System.out.println("1. Ascending");
-                                                            System.out.println("2. Descending");
-                                                            try {
-                                                                ascOrDes2 = Integer.parseInt(scan.nextLine());
-                                                                if (ascOrDes2 == 1) {
-                                                                    worked3 = true;
-                                                                    currentList = marketplace.sort("quantity", false, currentList);
-                                                                } else if (ascOrDes2 == 2) {
-                                                                    worked3 = true;
-                                                                    currentList = marketplace.sort("quantity", true, currentList);
-                                                                } else {
+                                                            } while (worked3 == false);
+                                                            worked2 = false;
+                                                        } else if (searchInt == currentList.size() + 2) { // sort by quantity
+                                                            search1 = true;
+                                                            do {
+                                                                System.out.println("How would you like to sort?");
+                                                                System.out.println("1. Ascending");
+                                                                System.out.println("2. Descending");
+                                                                try {
+                                                                    ascOrDes2 = Integer.parseInt(scan.nextLine());
+                                                                    if (ascOrDes2 == 1) {
+                                                                        worked3 = true;
+                                                                        currentList = marketplace.sort("quantity", false, currentList);
+                                                                    } else if (ascOrDes2 == 2) {
+                                                                        worked3 = true;
+                                                                        currentList = marketplace.sort("quantity", true, currentList);
+                                                                    } else {
+                                                                        worked3 = false;
+                                                                    }
+                                                                } catch (Exception e) {
                                                                     worked3 = false;
                                                                 }
-                                                            } catch (Exception e) {
-                                                                worked3 = false;
-                                                            }
-                                                        } while (worked3 == false);
-                                                        worked2 = false;
-                                                    } else if (searchInt == currentList.size() + 3) { // going back
-                                                        worked2 = true;
-                                                        search1 = false;
+                                                            } while (worked3 == false);
+                                                            worked2 = false;
+                                                        } else if (searchInt == currentList.size() + 3) { // going back
+                                                            worked2 = true;
+                                                            search1 = false;
 
-                                                    } else {
+                                                        } else {
+                                                            System.out.println("Try again");
+                                                            search1 = true;
+                                                            worked2 = false;
+                                                        }
+                                                    } catch (Exception e) {
                                                         System.out.println("Try again");
                                                         search1 = true;
                                                         worked2 = false;
                                                     }
-                                                } catch (Exception e) {
-                                                    System.out.println("Try again");
-                                                    search1 = true;
-                                                    worked2 = false;
-                                                }
-                                            } while (worked2 == false);
+                                                } while (worked2 == false);
+                                            }
                                         } while (search1 == true);
                                     } else if (selectedStore == marketplace.getAllStores().size() + 6) { // user selected to log out
                                         choice = 3;
