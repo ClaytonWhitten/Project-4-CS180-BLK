@@ -310,7 +310,8 @@ public class Main {
                                 System.out.println((marketplace.getAllStores().size() + 2) + ". Search");
                                 System.out.println((marketplace.getAllStores().size() + 3) + ". View Cart");
                                 System.out.println((marketplace.getAllStores().size() + 4) + ". View Statistics");
-                                System.out.println((marketplace.getAllStores().size() + 5) + ". Logout");
+                                System.out.println((marketplace.getAllStores().size() + 5) + ". Export Purchase History");
+                                System.out.println((marketplace.getAllStores().size() + 6) + ". Logout");
                                 try {
                                     int selectedStore = Integer.parseInt(scan.nextLine());
                                     if (selectedStore == 1) { // user selected all products
@@ -654,7 +655,7 @@ public class Main {
                                                 }
                                             } while (worked2 == false);
                                         } while (search1 == true);
-                                    } else if (selectedStore == marketplace.getAllStores().size() + 5) { // user selected to log out
+                                    } else if (selectedStore == marketplace.getAllStores().size() + 6) { // user selected to log out
                                         choice = 3;
                                         buyerChoice = false;
                                         continue;
@@ -713,12 +714,45 @@ public class Main {
                                             System.out.println("Which database would you like to view?");
                                             System.out.println("1. All stores");
                                             System.out.println("2. Your purchases");
+                                            System.out.println("3. Back");
                                             try {
                                                 int database = Integer.parseInt(scan.nextLine());
                                                 if (database == 1) {
+                                                    ArrayList<StoreFront> currentList = new ArrayList<>();
+                                                    currentList = marketplace.getAllStores();
+                                                    boolean sortDatabase = true;
+                                                    do {
+                                                        marketplace.printStoreStatistics(currentList);
+                                                        System.out.println("How would you like to sort the database");
+                                                        System.out.println("1. Ascending");
+                                                        System.out.println("2. Descending");
+                                                        System.out.println("3. Back");
+                                                        try {
+                                                            int sorter = Integer.parseInt(scan.nextLine());
+                                                            if (sorter == 1) {
 
+                                                                sortDatabase = true;
+                                                            } else if (sorter == 2) {
+
+                                                                sortDatabase = true;
+                                                            } else if (sorter == 3) {
+                                                                sortDatabase = false;
+                                                            } else {
+                                                                System.out.println("Try again");
+                                                                sortDatabase = true;
+                                                            }
+                                                        } catch (Exception e) {
+                                                            System.out.println("Try again");
+                                                            sortDatabase = true;
+                                                        }
+                                                    } while (sortDatabase == true);
+                                                    viewStats = true;
                                                 } else if (database == 2) {
-
+                                                    marketplace.printStoreStatsBuyer(buyer);
+                                                    System.out.println();
+                                                    viewStats = true;
+                                                } else if (database == 3) {
+                                                    viewStats = false;
                                                 } else {
                                                     System.out.println("Try again");
                                                     viewStats = true;
@@ -728,6 +762,18 @@ public class Main {
                                                 viewStats = true;
                                             }
                                         } while (viewStats == true);
+                                    } else if (selectedStore == marketplace.getAllStores().size() + 5) { // export purchase history
+                                        boolean works = true;
+                                        do {
+                                            System.out.println("Enter file name");
+                                            try {
+                                                buyer.exportPurchaseList(scan.nextLine());
+                                                works = true;
+                                            } catch (Exception e) {
+                                                System.out.println("Try again");
+                                                works = false;
+                                            }
+                                        } while (works == false);
                                     } else {
                                         System.out.println("Try again");
                                     }
